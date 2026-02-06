@@ -598,12 +598,13 @@ function generateShowdown(){
         const species = c.querySelector(".species").innerText.trim();
         const item = c.querySelector(".item-tag").innerText.trim();
         const ability = c.querySelector(".ability").innerText.split(":")[1].trim();
-        const rawTera = c.querySelector(".tera-type").innerText.trim();
-        const tera = rawTera.replace("Tera:", "").trim(); 
         
-        // New: Competitive Stats from Data Attributes
+        // Cleaned up Tera Logic:
+        // We just grab the text directly now since the HTML won't have "Tera:" in it anymore
+        const tera = c.querySelector(".tera-type").innerText.trim(); 
+        
         const gender = c.getAttribute("data-gender") ? ` (${c.getAttribute("data-gender")})` : "";
-        const evs = c.getAttribute("data-evs") || "252 HP / 252 Atk / 4 SpD"; // Default fallback
+        const evs = c.getAttribute("data-evs") || "252 HP / 252 Atk / 4 SpD"; 
         const nature = c.getAttribute("data-nature") || "Serious";
         const ivs = c.getAttribute("data-ivs"); 
 
@@ -611,10 +612,10 @@ function generateShowdown(){
             .map(li => li.innerText.trim())
             .join("\n- ");
         
-        // Exactly formatted for Showdown
+        // This follows the exact Showdown Export format
         output += `${nick} (${species})${gender} @ ${item}\n`;
         output += `Ability: ${ability}\n`;
-        output += `Tera Type: ${tera}\n`;
+        output += `Tera Type: ${tera}\n`; // This will now result in "Tera Type: Psychic"
         output += `EVs: ${evs}\n`;
         output += `${nature} Nature\n`;
         if(ivs) output += `IVs: ${ivs}\n`;
@@ -624,7 +625,6 @@ function generateShowdown(){
     document.getElementById("overlay").style.display = "block";
     document.getElementById("showdown-output").style.display = "block";
 }
-
 function closeModal(){
     document.getElementById("overlay").style.display = "none";
     document.getElementById("showdown-output").style.display = "none";
@@ -643,5 +643,6 @@ function copyToClipboard(){
 
 </body>
 </html>
+
 
 
