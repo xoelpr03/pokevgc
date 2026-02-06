@@ -480,7 +480,6 @@
 <div class="overlay" id="overlay" onclick="closeModal()"></div>
 <div id="showdown-output">
     <h3 style="margin-top:0">Showdown Export</h3>
-    <p style="font-size: 0.8rem; color: #666;">Copy and paste this into the Pokémon Showdown Teambuilder "Import from text" tool.</p>
     <textarea id="output-text" readonly></textarea>
     <div style="margin-top: 15px; display: flex; gap: 10px;">
         <button class="btn" onclick="copyToClipboard()">Copy to Clipboard</button>
@@ -489,83 +488,14 @@
 </div>
 
 <script>
-    const moveCategories = {
-  /* STATUS */
-  "Follow Me": "status",
-  "Helping Hand": "status",
-  "Trick Room": "status",
-  "Psychic Terrain": "status",
-  "Light Screen": "status",
-  "Reflect": "status",
-  "Magic Powder": "status",
-  "Tailwind": "status",
-  "Taunt": "status",
-  "Baby-Doll Eyes": "status",
-  "Tidy Up": "status",
-  "Leech Seed": "status",
-  "Floral Healing": "status",
-  "Protect": "status",
-  "Swords Dance": "status",
-  "Hone Claws": "status",
-  "Nasty Plot": "status",
-  "Quiver Dance": "status",
-  "Roost": "status",
-  "Toxic": "status",
-  "Iron Defense": "status",
-  "Will-O-Wisp": "status",
-  "Pain Split": "status",
+function updateTeamCount(){
+    const count = document.querySelectorAll(".pkmn-card.selected").length;
+    document.getElementById("team-count").innerText = `Selected: ${count}/6`;
+    document.getElementById("export-btn").disabled = count !== 6;
+}
 
-  /* PHYSICAL */
-  "Population Bomb": "physical",
-  "Facade": "physical",
-  "High Horsepower": "physical",
-  "Accelerock": "physical",
-  "Crunch": "physical",
-  "Rock Slide": "physical",
-  "Iron Head": "physical",
-  "Liquidation": "physical",
-  "X-Scissor": "physical",
-  "Body Slam": "physical",
-  "Double-Edge": "physical",
-  "Power Trip": "physical",
-  "Drill Peck": "physical",
-  "Bug Bite": "physical",
-  "Bullet Punch": "physical",
-  "Knock Off": "physical",
-  "U-turn": "physical",
-  "Flare Blitz": "physical",
-  "Shadow Claw": "physical",
-  "Earthquake": "physical",
-  "Body Press": "physical",
-  "Acrobatics": "physical",
-
-  /* SPECIAL */
-  "Expanding Force": "special",
-  "Dazzling Gleam": "special",
-  "Shadow Ball": "special",
-  "Moonblast": "special",
-  "Giga Drain": "special",
-  "Draining Kiss": "special",
-  "Make It Rain": "special",
-  "Bug Buzz": "special",
-  "Tera Blast": "special",
-  "Fiery Dance": "special",
-  "Hyper Voice": "special",
-  "Sparkling Aria": "special",
-  "Energy Ball": "special",
-  "Air Slash": "special",
-  "Flamethrower": "special",
-  "Dragon Pulse": "special",
-  "Flash Cannon": "special",
-  "Volt Switch": "special",
-  "Overheat": "special",
-  "Hex": "special"
-};
-
-    let selectedPokemon = [];
-
-    function togglePokemon(card, force = false){
-    if(force) {
+function togglePokemon(card, force=false){
+    if(force){
         card.classList.add("selected");
     } else {
         if(card.classList.contains("selected")){
@@ -579,218 +509,51 @@
     updateTeamCount();
 }
 
-
-    function updateUI() {
-        document.getElementById('team-count').innerText = `Selected: ${selectedPokemon.length}/6`;
-        document.getElementById('export-btn').disabled = selectedPokemon.length === 0;
-    }
-
-   function generateShowdown() {
-    let exportText = "";
-
-    selectedPokemon.forEach(card => {
-        const nick = card.querySelector('.nickname').innerText.trim();
-        const species = card.querySelector('.species').innerText.trim();
-        const item = card.querySelector('.item-tag').innerText.trim();
-        const ability = card.querySelector('.ability').innerText
-            .replace('Ability:', '')
-            .trim();
-
-        const tera = card.querySelector('.tera-type').innerText
-    .replace(/tera/gi, '')
-    .trim()
-    .toLowerCase()
-    .replace(/^\w/, c => c.toUpperCase());
-
-        // Pull nature + EVs from stats-info
-        const statsBlock = card.querySelector('.stats-info');
-        const fullStatsText = statsBlock.innerText.replace(statsBlock.querySelector('.ability').innerText, '').trim();
-        const [naturePart, evPart] = fullStatsText.split('|');
-
-        const nature = naturePart.trim();
-        const evs = evPart ? evPart.trim() : "";
-
-        const moves = Array.from(card.querySelectorAll('.moves-list li'))
-            .map(li => `- ${li.innerText}`)
-            .join('\n');
-
-        exportText += `${nick} (${species}) @ ${item}\n`;
-        exportText += `Ability: ${ability}\n`;
-        exportText += `Tera Type: ${tera}\n`;
-        exportText += `EVs: ${evs}\n`;
-        exportText += `${nature} Nature\n`;
-        exportText += `${moves}\n\n`;
-    });
-
-    document.getElementById('output-text').value = exportText;
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById('showdown-output').style.display = 'block';
-}
-
-    function closeModal() {
-        document.getElementById('overlay').style.display = 'none';
-        document.getElementById('showdown-output').style.display = 'none';
-    }
-
-    function copyToClipboard() {
-    navigator.clipboard.writeText(
-        document.getElementById('output-text').value
-    );
-    alert("Copied to clipboard!");
-}
-/* BASIC MOVE DESCRIPTIONS */
-const moveDescriptions = {
-  "Expanding Force": "A Psychic-type attack that deals massive spread damage and gains a power boost during Psychic Terrain.",
-  "Follow Me": "Redirects all opposing single-target attacks toward the user to protect allies and guarantee safe setup turns.",
-  "Helping Hand": "Boosts an ally's next attack damage by 50%. A premier offensive support move in doubles matches.",
-  "Trick Room": "Reverses the move order for five turns, allowing slower Pokémon to act before faster opponents.",
-  "Psychic Terrain": "Sets terrain for five turns that prevents priority moves and boosts the power of Psychic attacks.",
-  "Dazzling Gleam": "A reliable Fairy-type spread attack that damages both opponents while providing excellent neutral coverage.",
-  "Light Screen": "Reduces damage taken from special attacks for five turns, or eight turns if holding Light Clay.",
-  "Reflect": "Reduces damage taken from physical attacks for five turns, or eight turns if holding Light Clay.",
-  "Magic Powder": "Changes the target's typing to pure Psychic, effectively removing their original resistances and STAB bonuses.",
-  "Shadow Ball": "A Ghost-type special attack that has a chance to lower the target's Special Defense stat.",
-  "Moonblast": "A powerful Fairy-type special attack that has a chance to lower the target's Special Attack stat.",
-  "Giga Drain": "A Grass-type special attack that recovers HP equal to half of the total damage dealt.",
-  "Tailwind": "Summons a gust of wind that doubles the Speed stat of all allied Pokémon for four turns.",
-  "Taunt": "Prevents the target from using any non-damaging status moves for the next three turns of combat.",
-  "Population Bomb": "A multi-hit Normal-type physical attack that can strike the target up to ten times in succession.",
-  "Baby-Doll Eyes": "A priority move that lowers the target's Attack stat before they can execute their own move.",
-  "Tidy Up": "Removes entry hazards and substitutes from the field while boosting the user's Attack and Speed stats.",
-  "Leech Seed": "Plants a seed that drains the target's HP every turn to heal the user's own health.",
-  "Draining Kiss": "A Fairy-type attack that restores the user's health by a large percentage of the damage dealt.",
-  "Floral Healing": "A supportive move that restores a significant portion of the target ally's maximum HP pool.",
-  "Facade": "A Normal-type attack that doubles in power if the user is burned, poisoned, or paralyzed.",
-  "Protect": "Protects the user from all incoming attacks for one turn, though consecutive uses may often fail.",
-  "Swords Dance": "A powerful status move that sharply raises the user's Attack stat by two stages instantly.",
-  "High Horsepower": "A high-accuracy, Ground-type physical attack that deals heavy damage to a single targeted opponent.",
-  "Accelerock": "A specialized Rock-type physical move that strikes with high priority to finish off weakened targets.",
-  "Crunch": "A Dark-type physical attack that has a chance to lower the target's Defense stat on impact.",
-  "Rock Slide": "A Rock-type spread attack that hits both foes and has a chance to cause flinching.",
-  "Iron Head": "A Steel-type physical attack that deals solid damage and has a chance to flinch the target.",
-  "Liquidation": "A Water-type physical attack that hits hard and has a chance to lower the target's Defense.",
-  "X-Scissor": "A straightforward Bug-type physical attack where the user slashes the target with crossed scythes or claws.",
-  "Body Slam": "A Normal-type physical attack that deals damage and has a high chance to paralyze the target.",
-  "Double-Edge": "A high-power Normal-type attack that deals massive damage but also causes significant recoil to the user.",
-  "Power Trip": "A Dark-type attack that increases in base power for every positive stat boost the user possesses.",
-  "Hone Claws": "A status move where the user sharpens their claws to raise both Attack and Accuracy stats.",
-  "Drill Peck": "A reliable Flying-type physical attack where the user strikes the target with a spinning, beak-first dive.",
-  "Make It Rain": "A powerful Steel-type spread attack that deals massive damage but lowers the user's Special Attack stat.",
-  "Nasty Plot": "A dark-themed status move that sharply raises the user's Special Attack stat by two stages.",
-  "Quiver Dance": "A beautiful dance that boosts the user's Special Attack, Special Defense, and Speed stats simultaneously.",
-  "Bug Buzz": "A Bug-type special attack that vibrates the air, with a chance to lower the target's Special Defense.",
-  "Tera Blast": "A versatile move that matches the user's Tera Type and utilizes their highest offensive stat when Terastallized.",
-  "Fiery Dance": "A Fire-type special attack that deals damage and has a high chance to raise Special Attack.",
-  "Hyper Voice": "A Normal-type spread move that uses sound waves to damage both opponents on the battlefield.",
-  "Sparkling Aria": "A Water-type special attack that deals damage and heals the burns of any Pokémon it hits.",
-  "Energy Ball": "A Grass-type special attack that draws power from nature, with a chance to lower Special Defense.",
-  "Air Slash": "A Flying-type special attack that slices the air and has a high chance to flinch opponents.",
-  "Flamethrower": "A reliable Fire-type special attack that deals consistent damage and has a chance to burn targets.",
-  "Dragon Pulse": "A consistent Dragon-type special attack that strikes the target with a powerful shockwave of pure energy.",
-  "Flash Cannon": "A Steel-type special attack that gathers light energy, with a chance to lower the target's Special Defense.",
-  "Body Press": "A physical attack that calculates damage based on the user's Defense stat rather than their Attack.",
-  "Toxic": "A status move that badly poisons the target, causing increasing damage at the end of every turn.",
-  "Earthquake": "A powerful Ground-type spread attack that hits all adjacent Pokémon on the field with massive force.",
-  "Roost": "A recovery move that restores half of the user's HP but removes their Flying-type traits temporarily.",
-  "Knock Off": "Deals increased damage if the target holds an item, which is then removed for the duration.",
-  "Shadow Claw": "A Ghost-type physical attack with a high critical-hit ratio that strikes the target from the shadows.",
-  "Iron Defense": "A Steel-type status move that sharply raises the user's Defense stat by two stages on use.",
-  "Fake Out": "An increased-priority attack that causes the target to flinch, but only works on the first turn.",
-  "Flare Blitz": "A high-power Fire-type physical attack that inflicts recoil damage and has a chance to burn.",
-  "U-turn": "A Bug-type physical attack that allows the user to switch out for a teammate after dealing damage.",
-  "Volt Switch": "An Electric-type special attack that returns the user to their Poké Ball immediately after dealing damage.",
-  "Overheat": "A high-intensity Fire-type special attack that deals massive damage but suffers from lower base accuracy.",
-  "Will-O-Wisp": "A Fire-type status move that inflicts a burn, reducing the target's Attack and dealing chip damage.",
-    "Pain Split": "A status move that adds the user's and target's HP together and divides it equally between them.",
-  "Hex": "A Ghost-type special attack that doubles in power if the target is affected by a status condition such as burn, poison, or paralysis.",
-      "Acrobatics": "A Flying-type physical attack that doubles in power if the user is not holding an item, making it extremely strong after consuming a berry.",
-  "Bullet Punch": "A Steel-type physical attack with increased priority that allows the user to strike before most other moves.",
-  "Bug Bite": "A Bug-type physical attack that also steals and consumes the target's berry, gaining its effect immediately if one is held.",
-
-
-};
-
-function buildMoveDex(){
-    const moveMap = {};
-
-    document.querySelectorAll('.pkmn-card').forEach(card=>{
-        const species = card.querySelector('.species').innerText;
-
-        // EXTRAER ID DESDE EL SPRITE HOME
-        const homeSprite = card.querySelector('.render-container img').src;
-        const match = homeSprite.match(/\/(\d+)\.png$/);
-        const dexId = match ? match[1] : null;
-
-        // CONSTRUIR SPRITE 2D
-        const sprite2D = dexId
-          ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dexId}.png`
-          : homeSprite;
-
-        card.querySelectorAll('.moves-list li').forEach(li=>{
-            const move = li.innerText;
-
-            if(!moveMap[move]){
-                moveMap[move] = {
-                    desc: moveDescriptions[move] || "No description available.",
-                    learners: []
-                };
-            }
-
-            moveMap[move].learners.push({
-                species,
-                sprite: sprite2D
-            });
-        });
-    });
-
-    const dex = document.getElementById("move-dex");
-    dex.innerHTML = "";
-
-    Object.keys(moveMap).sort().forEach(move=>{
-        const card = document.createElement("div");
-        card.className = "move-card";
-
-        card.innerHTML = `
-            <div class="move-name move-${moveCategories[move] || "status"}">${move}</div>
-            <div class="move-desc">${moveMap[move].desc}</div>
-            <div class="learners">
-                ${moveMap[move].learners.map(p=>`
-                    <div class="learner">
-                        <img src="${p.sprite}">
-                    </div>
-                `).join("")}
-            </div>
-        `;
-
-        dex.appendChild(card);
-    });
-}
-
-    document.getElementById("random-btn").addEventListener("click", () => {
+// Random 6 button
+document.getElementById("random-btn").addEventListener("click", () => {
     const cards = Array.from(document.querySelectorAll(".pkmn-card"));
-    
-    // Deseleccionar todo primero usando togglePokemon si está seleccionado
-    cards.forEach(c => {
-        if (c.classList.contains("selected")) togglePokemon(c, true); // true = forzar deselección
-    });
-
-    // Mezclar y elegir 6
-    for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+    // deselect all
+    cards.forEach(c => { if(c.classList.contains("selected")) togglePokemon(c, true); });
+    // shuffle and pick 6
+    for(let i = cards.length-1; i>0; i--){
+        const j = Math.floor(Math.random()*(i+1));
         [cards[i], cards[j]] = [cards[j], cards[i]];
     }
-
-    const selected = cards.slice(0, 6);
-    selected.forEach(c => togglePokemon(c, true)); // true = forzar selección
+    cards.slice(0,6).forEach(c => togglePokemon(c, true));
 });
 
+function generateShowdown(){
+    const selected = document.querySelectorAll(".pkmn-card.selected");
+    let output = "";
+    selected.forEach(c => {
+        const nick = c.querySelector(".nickname").innerText;
+        const species = c.querySelector(".species").innerText;
+        const item = c.querySelector(".item-tag").innerText;
+        const ability = c.querySelector(".ability").innerText.split(":")[1].trim();
+        const moves = Array.from(c.querySelectorAll(".moves-list li")).map(li => li.innerText).join("\n- ");
+        output += `${nick} (${species}) @ ${item}\nAbility: ${ability}\n- ${moves}\n\n`;
+    });
+    document.getElementById("output-text").value = output.trim();
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("showdown-output").style.display = "block";
+}
 
-/* Run once page loads */
-window.addEventListener("load", buildMoveDex);
+function closeModal(){
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("showdown-output").style.display = "none";
+}
+
+function copyToClipboard(){
+    const text = document.getElementById("output-text");
+    text.select();
+    text.setSelectionRange(0,99999);
+    navigator.clipboard.writeText(text.value);
+}
 </script>
 
 </body>
 </html>
+
 
 
 
