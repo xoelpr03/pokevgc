@@ -272,6 +272,39 @@
                     <div class="strategy-box">A snowballing win-condition. By utilizing Hone Claws, Corviknight simultaneously boosts its Attack and ensures that Power Trip becomes stronger with every stat increase. Mirror Armor protects it from Intimidate and other stat-dropping moves, reflecting them back at the opponent. Once it gains a few boosts, Power Trip becomes a high-base-power Dark move that can sweep through entire teams, while Drill Peck provides consistent STAB.</div>
                     <div class="stats-info"><span class="ability">Ability: Mirror Armor</span>Adamant | 248 HP / 252 Atk / 8 SpD</div>
                 </div>
+                <div class="pkmn-card" onclick="togglePokemon(this)">
+    <div class="select-indicator"></div>
+    <div class="card-header">
+        <div>
+            <span class="nickname">Lisbon</span>
+            <span class="species">Scizor</span>
+        </div>
+        <span class="item-tag">Occa Berry</span>
+    </div>
+
+    <div class="render-container">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/212.png">
+    </div>
+
+    <div class="tera-type" style="background: var(--bug)">Tera Bug</div>
+
+    <ul class="moves-list">
+        <li>Acrobatics</li>
+        <li>Bullet Punch</li>
+        <li>Bug Bite</li>
+        <li>Swords Dance</li>
+    </ul>
+
+    <div class="strategy-box">
+        A classic physical win-condition with modern spice. Technician boosts the power of Bullet Punch and Bug Bite, turning Scizor into a terrifying priority attacker. Occa Berry lets it survive a crucial Fire-type hit, often allowing it to set up Swords Dance safely. After a boost, Acrobatics becomes a strong coverage option once the berry is consumed, while Tera Bug massively amplifies Bug Bite to shred bulky targets.
+    </div>
+
+    <div class="stats-info">
+        <span class="ability">Ability: Technician</span>
+        Adamant | 248 HP / 252 Atk / 8 SpD
+    </div>
+</div>
+
             </div>
         </div>
 
@@ -591,7 +624,11 @@ const moveDescriptions = {
   "Overheat": "A high-intensity Fire-type special attack that deals massive damage but suffers from lower base accuracy.",
   "Will-O-Wisp": "A Fire-type status move that inflicts a burn, reducing the target's Attack and dealing chip damage.",
     "Pain Split": "A status move that adds the user's and target's HP together and divides it equally between them.",
-  "Hex": "A Ghost-type special attack that doubles in power if the target is affected by a status condition such as burn, poison, or paralysis."
+  "Hex": "A Ghost-type special attack that doubles in power if the target is affected by a status condition such as burn, poison, or paralysis.",
+      "Acrobatics": "A Flying-type physical attack that doubles in power if the user is not holding an item, making it extremely strong after consuming a berry.",
+  "Bullet Punch": "A Steel-type physical attack with increased priority that allows the user to strike before most other moves.",
+  "Bug Bite": "A Bug-type physical attack that also steals and consumes the target's berry, gaining its effect immediately if one is held.",
+
 
 };
 
@@ -659,6 +696,7 @@ window.addEventListener("load", buildMoveDex);
 
 </body>
 </html>
+
 
 
 
