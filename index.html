@@ -590,39 +590,36 @@ document.getElementById("random-btn").addEventListener("click", () => {
 // 1. Add a data-stats attribute to your pkmn-cards in the HTML like this:
 // <div class="pkmn-card" onclick="togglePokemon(this)" data-evs="252 HP / 252 Atk / 4 Def" data-nature="Brave" data-ivs="0 Spe">
 
-function generateShowdown() {
+function generateShowdown(){
     const selected = document.querySelectorAll(".pkmn-card.selected");
     let output = "";
-
     selected.forEach(c => {
         const nick = c.querySelector(".nickname").innerText.trim();
         const species = c.querySelector(".species").innerText.trim();
         const item = c.querySelector(".item-tag").innerText.trim();
         const ability = c.querySelector(".ability").innerText.split(":")[1].trim();
         const rawTera = c.querySelector(".tera-type").innerText.trim();
-        const tera = rawTera.replace("Tera:", "").trim();
+        const tera = rawTera.replace("Tera:", "").trim(); 
         
-        // Grab competitive data from data attributes (with fallbacks)
-        const evs = c.getAttribute("data-evs") || "252 HP / 252 Atk / 4 SpD";
+        // New: Competitive Stats from Data Attributes
+        const gender = c.getAttribute("data-gender") ? ` (${c.getAttribute("data-gender")})` : "";
+        const evs = c.getAttribute("data-evs") || "252 HP / 252 Atk / 4 SpD"; // Default fallback
         const nature = c.getAttribute("data-nature") || "Serious";
-        const ivs = c.getAttribute("data-ivs");
+        const ivs = c.getAttribute("data-ivs"); 
 
         const moves = Array.from(c.querySelectorAll(".moves-list li"))
             .map(li => li.innerText.trim())
             .join("\n- ");
-
-        // Build the Showdown String
-        let pokemonString = `${nick} (${species}) @ ${item}\n`;
-        pokemonString += `Ability: ${ability}\n`;
-        pokemonString += `Tera Type: ${tera}\n`;
-        pokemonString += `EVs: ${evs}\n`;
-        pokemonString += `${nature} Nature\n`;
-        if (ivs) pokemonString += `IVs: ${ivs}\n`;
-        pokemonString += `- ${moves}\n\n`;
-
-        output += pokemonString;
+        
+        // Exactly formatted for Showdown
+        output += `${nick} (${species})${gender} @ ${item}\n`;
+        output += `Ability: ${ability}\n`;
+        output += `Tera Type: ${tera}\n`;
+        output += `EVs: ${evs}\n`;
+        output += `${nature} Nature\n`;
+        if(ivs) output += `IVs: ${ivs}\n`;
+        output += `- ${moves}\n\n`;
     });
-
     document.getElementById("output-text").value = output.trim();
     document.getElementById("overlay").style.display = "block";
     document.getElementById("showdown-output").style.display = "block";
@@ -646,4 +643,5 @@ function copyToClipboard(){
 
 </body>
 </html>
+
 
