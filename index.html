@@ -6,7 +6,7 @@
     <title>My VGC Pokémon</title>
     <style>
 :root {
-    --pkmn-red: #000000; --dark: #1e1e24; --bg: #f0f4f8;
+    --pkmn-red: #cc1212; --dark: #1e1e24; --bg: #f0f4f8;
     --normal: #A8A77A; --fire: #EE8130; --water: #6390F0; --electric: #F7D02C;
     --grass: #7AC74C; --ice: #96D9D6; --fighting: #C22E28; --poison: #A33EA1;
     --ground: #E2BF65; --flying: #A98FF3; --psychic: #F95587; --bug: #A6B91A;
@@ -51,8 +51,7 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
 .moves-list li { font-size: 0.85rem; padding: 2px 0; font-weight: 600; color: #2d3436; }
 .moves-list li::before { content: "• "; color: var(--pkmn-red); }
 .strategy-box { background: #f9f9f9; border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 0.8rem; line-height: 1.4; color: #444; font-style: italic; border-left: 3px solid #ccc; flex-grow: 1; }
-.stats-info { font-family: monospace; font-size: 0.75rem; color: #636e72; background: #fafafa; padding: 8px; border-radius: 5px; }
-.ability { font-weight: bold; color: #2c3e50; display: block; margin-bottom: 4px; }
+.ability { font-weight: bold; color: #2c3e50; font-size: 0.8rem; display: block; margin-bottom: 4px; }
 
 /* Floating Export Panel */
 #export-panel {
@@ -93,39 +92,63 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
         <div class="pokemon-grid">
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Yessir</span><span class="species">Indeedee-F</span></div><span class="item-tag">Psychic Seed</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/876-f.png"></div>
+                <span class="tera-type" style="background: var(--psychic)">Tera: Psychic</span>
+                <span class="ability">Ability: Psychic Surge</span>
                 <ul class="moves-list"><li>Expanding Force</li><li>Follow Me</li><li>Helping Hand</li><li>Trick Room</li></ul>
-                <div class="strategy-box">Sets Psychic Terrain, draws hits, and keeps teammates safe. Bulky and boosts allies' damage.</div>
+                <div class="strategy-box">Sets Psychic Terrain, draws hits, and keeps teammates safe.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Fridge</span><span class="species">Farigiraf</span></div><span class="item-tag">Mental Herb</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/981.png"></div>
+                <span class="tera-type" style="background: var(--normal)">Tera: Normal</span>
+                <span class="ability">Ability: Armor Tail</span>
                 <ul class="moves-list"><li>Psychic Terrain</li><li>Expanding Force</li><li>Trick Room</li><li>Dazzling Gleam</li></ul>
-                <div class="strategy-box">Reliable Trick Room setter, can’t be flinched. Hits hard in Psychic Terrain.</div>
+                <div class="strategy-box">Reliable Trick Room setter, can’t be flinched.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Brillibrilli</span><span class="species">Hatterene</span></div><span class="item-tag">Light Clay</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/858.png"></div>
+                <span class="tera-type" style="background: var(--psychic)">Tera: Psychic</span>
+                <span class="ability">Ability: Magic Bounce</span>
                 <ul class="moves-list"><li>Light Screen</li><li>Reflect</li><li>Magic Powder</li><li>Shadow Ball</li></ul>
-                <div class="strategy-box">Bounces status moves, sets screens, and messes with enemy types with Magic Powder.</div>
+                <div class="strategy-box">Bounces status moves and sets defensive screens.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Lil Guy</span><span class="species">Whimsicott</span></div><span class="item-tag">Focus Sash</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/547.png"></div>
+                <span class="tera-type" style="background: var(--grass)">Tera: Grass</span>
+                <span class="ability">Ability: Prankster</span>
                 <ul class="moves-list"><li>Moonblast</li><li>Giga Drain</li><li>Tailwind</li><li>Taunt</li></ul>
-                <div class="strategy-box">Speed control king. Prankster Tailwind first, survives hits, can disrupt enemies.</div>
+                <div class="strategy-box">Speed control king with Prankster Tailwind.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Family ❤</span><span class="species">Maushold</span></div><span class="item-tag">Wide Lens</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/925.png"></div>
+                <span class="tera-type" style="background: var(--normal)">Tera: Normal</span>
+                <span class="ability">Ability: Friend Guard</span>
                 <ul class="moves-list"><li>Helping Hand</li><li>Population Bomb</li><li>Baby-Doll Eyes</li><li>Tidy Up</li></ul>
-                <div class="strategy-box">Supports with Friend Guard and Helping Hand, but Population Bomb can wipe stuff.</div>
+                <div class="strategy-box">Protects allies with Friend Guard while posing a huge threat.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Healer</span><span class="species">Comfey</span></div><span class="item-tag">Big Root</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/764.png"></div>
+                <span class="tera-type" style="background: var(--fairy)">Tera: Fairy</span>
+                <span class="ability">Ability: Triage</span>
                 <ul class="moves-list"><li>Leech Seed</li><li>Draining Kiss</li><li>Floral Healing</li><li>Giga Drain</li></ul>
-                <div class="strategy-box">Priority healer with Triage. Keeps teammates alive and chips damage back.</div>
+                <div class="strategy-box">Priority healer with Triage. Keeps teammates alive.</div>
             </div>
 
         </div>
@@ -136,33 +159,53 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
         <div class="pokemon-grid">
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Moone</span><span class="species">Ursaluna</span></div><span class="item-tag">Flame Orb</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/901.png"></div>
+                <span class="tera-type" style="background: var(--normal)">Tera: Normal</span>
+                <span class="ability">Ability: Guts</span>
                 <ul class="moves-list"><li>Facade</li><li>Protect</li><li>Swords Dance</li><li>High Horsepower</li></ul>
-                <div class="strategy-box">TR monster. Guts + Flame Orb makes Facade hit crazy hard. High Horsepower handles steel/rock.</div>
+                <div class="strategy-box">TR monster. Guts + Flame Orb makes Facade hit crazy hard.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Dusky</span><span class="species">Lycanroc-Dusk</span></div><span class="item-tag">Muscle Band</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/745-dusk.png"></div>
+                <span class="tera-type" style="background: var(--ghost)">Tera: Ghost</span>
+                <span class="ability">Ability: Tough Claws</span>
                 <ul class="moves-list"><li>Accelerock</li><li>Crunch</li><li>Rock Slide</li><li>Iron Head</li></ul>
-                <div class="strategy-box">Fast cleanup dude. Tough Claws boosts priority hits, Tera Ghost adds defense.</div>
+                <div class="strategy-box">Fast cleanup. Tough Claws boosts priority.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Crab</span><span class="species">Kingler</span></div><span class="item-tag">Life Orb</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/99.png"></div>
+                <span class="tera-type" style="background: var(--water)">Tera: Water</span>
+                <span class="ability">Ability: Sheer Force</span>
                 <ul class="moves-list"><li>Liquidation</li><li>X-Scissor</li><li>Body Slam</li><li>Double-Edge</li></ul>
-                <div class="strategy-box">Wall-breaker with Sheer Force + Life Orb. Hits hard and covers everything.</div>
+                <div class="strategy-box">Wall-breaker with Sheer Force + Life Orb.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Powerplay</span><span class="species">Corviknight</span></div><span class="item-tag">Rocky Helmet</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/823.png"></div>
+                <span class="tera-type" style="background: var(--flying)">Tera: Flying</span>
+                <span class="ability">Ability: Mirror Armor</span>
                 <ul class="moves-list"><li>Power Trip</li><li>Hone Claws</li><li>Iron Head</li><li>Drill Peck</li></ul>
-                <div class="strategy-box">Boosts itself with Hone Claws + Power Trip. Mirror Armor protects boosts, Drill Peck for safe STAB.</div>
+                <div class="strategy-box">Boosts itself with Hone Claws + Power Trip.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Lisbon</span><span class="species">Scizor</span></div><span class="item-tag">Occa Berry</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/212.png"></div>
+                <span class="tera-type" style="background: var(--steel)">Tera: Steel</span>
+                <span class="ability">Ability: Technician</span>
                 <ul class="moves-list"><li>Acrobatics</li><li>Bullet Punch</li><li>Bug Bite</li><li>Swords Dance</li></ul>
-                <div class="strategy-box">Tech priority. Occa Berry for safe Swords Dance, Acrobatics & Tera Bug destroy bulky foes.</div>
+                <div class="strategy-box">Tech priority. Occa Berry allows safe setup.</div>
             </div>
 
         </div>
@@ -173,33 +216,53 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
         <div class="pokemon-grid">
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Mintage</span><span class="species">Gholdengo</span></div><span class="item-tag">Air Balloon</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1000.png"></div>
+                <span class="tera-type" style="background: var(--steel)">Tera: Steel</span>
+                <span class="ability">Ability: Good as Gold</span>
                 <ul class="moves-list"><li>Dazzling Gleam</li><li>Make It Rain</li><li>Nasty Plot</li><li>Shadow Ball</li></ul>
-                <div class="strategy-box">Status immune with Good as Gold, sets Nasty Plot safely. Spread damage with Make It Rain.</div>
+                <div class="strategy-box">Status immune, high-pressure spread damage.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Sploof</span><span class="species">Volcarona</span></div><span class="item-tag">Heavy-Duty Boots</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/637.png"></div>
+                <span class="tera-type" style="background: var(--ice)">Tera: Ice</span>
+                <span class="ability">Ability: Flame Body</span>
                 <ul class="moves-list"><li>Tera Blast</li><li>Fiery Dance</li><li>Quiver Dance</li><li>Bug Buzz</li></ul>
-                <div class="strategy-box">Setup sweeper. Quiver Dance + Flame Body punishes physicals. Tera Ice for counter traps.</div>
+                <div class="strategy-box">Quiver Dance setup with Tera Ice coverage.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Bubbles</span><span class="species">Primarina</span></div><span class="item-tag">Choice Specs</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/730.png"></div>
+                <span class="tera-type" style="background: var(--water)">Tera: Water</span>
+                <span class="ability">Ability: Liquid Voice</span>
                 <ul class="moves-list"><li>Hyper Voice</li><li>Dazzling Gleam</li><li>Sparkling Aria</li><li>Energy Ball</li></ul>
-                <div class="strategy-box">Spread attacker. Liquid Voice makes Hyper Voice Water-type, boosted by Specs. Sparkling Aria hits singles.</div>
+                <div class="strategy-box">Specs-boosted Water Hyper Voices.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Flinch</span><span class="species">Togekiss</span></div><span class="item-tag">Assault Vest</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/468.png"></div>
+                <span class="tera-type" style="background: var(--fairy)">Tera: Fairy</span>
+                <span class="ability">Ability: Serene Grace</span>
                 <ul class="moves-list"><li>Air Slash</li><li>Tailwind</li><li>Dazzling Gleam</li><li>Flamethrower</li></ul>
-                <div class="strategy-box">Bulky special with flinch spam. Tailwind + Dazzling Gleam support teammates.</div>
+                <div class="strategy-box">Bulky flinch spammer with Serene Grace.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Schrödinger</span><span class="species">Zoroark-Hisui</span></div><span class="item-tag">Spell Tag</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/571-hisui.png"></div>
+                <span class="tera-type" style="background: var(--ghost)">Tera: Ghost</span>
+                <span class="ability">Ability: Illusion</span>
                 <ul class="moves-list"><li>Hex</li><li>Will-O-Wisp</li><li>Hyper Voice</li><li>Protect</li></ul>
-                <div class="strategy-box">Burn + Hex hits hard. Spell Tag boosts damage, Hyper Voice spreads damage through subs.</div>
+                <div class="strategy-box">Illusion mind games and Hex damage.</div>
             </div>
 
         </div>
@@ -210,21 +273,33 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
         <div class="pokemon-grid">
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Stamina</span><span class="species">Archaludon</span></div><span class="item-tag">Leftovers</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1018.png"></div>
+                <span class="tera-type" style="background: var(--steel)">Tera: Steel</span>
+                <span class="ability">Ability: Stamina</span>
                 <ul class="moves-list"><li>Protect</li><li>Dragon Pulse</li><li>Flash Cannon</li><li>Body Press</li></ul>
-                <div class="strategy-box">Physical wall. Stamina boosts Defense every hit, Body Press gets stronger over time.</div>
+                <div class="strategy-box">Defense boosts every hit, snowballing Body Press.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Britney</span><span class="species">Gliscor</span></div><span class="item-tag">Toxic Orb</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/472.png"></div>
+                <span class="tera-type" style="background: var(--poison)">Tera: Poison</span>
+                <span class="ability">Ability: Poison Heal</span>
                 <ul class="moves-list"><li>Toxic</li><li>Earthquake</li><li>Roost</li><li>Knock Off</li></ul>
-                <div class="strategy-box">Long game queen. Poison Heal keeps it healthy, Toxic + Knock Off grind enemies down.</div>
+                <div class="strategy-box">Poison Heal keeps it healthy in the long game.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Doublabe</span><span class="species">Doublade</span></div><span class="item-tag">Eviolite</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/680.png"></div>
+                <span class="tera-type" style="background: var(--steel)">Tera: Steel</span>
+                <span class="ability">Ability: No Guard</span>
                 <ul class="moves-list"><li>Protect</li><li>Iron Head</li><li>Shadow Claw</li><li>Iron Defense</li></ul>
-                <div class="strategy-box">Eviolite tank. Super bulky, uses Iron Defense to survive and hits back hard.</div>
+                <div class="strategy-box">Eviolite tank with massive physical bulk.</div>
             </div>
 
         </div>
@@ -235,15 +310,23 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
         <div class="pokemon-grid">
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Powerhouse</span><span class="species">Incineroar</span></div><span class="item-tag">Sitrus Berry</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/727.png"></div>
+                <span class="tera-type" style="background: var(--grass)">Tera: Grass</span>
+                <span class="ability">Ability: Intimidate</span>
                 <ul class="moves-list"><li>Fake Out</li><li>Flare Blitz</li><li>U-turn</li><li>Knock Off</li></ul>
-                <div class="strategy-box">Best VGC pivot. Intimidate + Fake Out, U-turn to reset, Tera Grass dodges attacks.</div>
+                <div class="strategy-box">Intimidate + Fake Out cycling with U-turn.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="select-indicator"></div>
                 <div class="card-header"><div><span class="nickname">Air Fryer</span><span class="species">Rotom-Heat</span></div><span class="item-tag">Charcoal</span></div>
+                <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/479-heat.png"></div>
+                <span class="tera-type" style="background: var(--fire)">Tera: Fire</span>
+                <span class="ability">Ability: Levitate</span>
                 <ul class="moves-list"><li>Volt Switch</li><li>Overheat</li><li>Will-O-Wisp</li><li>Pain Split</li></ul>
-                <div class="strategy-box">Versatile pivot. Levitate avoids ground hits, Volt Switch moves the team, Will-O-Wisp cripples sweepers.</div>
+                <div class="strategy-box">Levitate pivot that cripples physical attackers.</div>
             </div>
 
         </div>
@@ -290,28 +373,17 @@ function togglePokemon(card, force=false){
     updateTeamCount();
 }
 
-// Random 6 button
 document.getElementById("random-btn").addEventListener("click", () => {
     const cards = Array.from(document.querySelectorAll(".pkmn-card"));
-    const selected = cards.filter(c => c.classList.contains("selected"));
-
-    // If already 6 selected, deselect all first
-    if(selected.length === 6) {
-        selected.forEach(c => togglePokemon(c)); // normal toggle to remove
-    }
-
-    // shuffle and pick 6
+    cards.forEach(c => c.classList.remove("selected"));
+    
     for(let i = cards.length-1; i>0; i--){
         const j = Math.floor(Math.random()*(i+1));
         [cards[i], cards[j]] = [cards[j], cards[i]];
     }
 
-    // select 6 random
-    cards.slice(0,6).forEach(c => {
-        if(!c.classList.contains("selected")) togglePokemon(c);
-    });
+    cards.slice(0,6).forEach(c => togglePokemon(c, true));
 });
-
 
 function generateShowdown(){
     const selected = document.querySelectorAll(".pkmn-card.selected");
@@ -321,8 +393,9 @@ function generateShowdown(){
         const species = c.querySelector(".species").innerText;
         const item = c.querySelector(".item-tag").innerText;
         const ability = c.querySelector(".ability").innerText.split(":")[1].trim();
+        const tera = c.querySelector(".tera-type").innerText.split(":")[1].trim();
         const moves = Array.from(c.querySelectorAll(".moves-list li")).map(li => li.innerText).join("\n- ");
-        output += `${nick} (${species}) @ ${item}\nAbility: ${ability}\n- ${moves}\n\n`;
+        output += `${nick} (${species}) @ ${item}\nAbility: ${ability}\nTera Type: ${tera}\n- ${moves}\n\n`;
     });
     document.getElementById("output-text").value = output.trim();
     document.getElementById("overlay").style.display = "block";
@@ -337,29 +410,9 @@ function closeModal(){
 function copyToClipboard(){
     const text = document.getElementById("output-text");
     text.select();
-    text.setSelectionRange(0,99999);
     navigator.clipboard.writeText(text.value);
 }
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
