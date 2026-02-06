@@ -3,145 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My VGC Pokémon</title>
+    <title>VGC Team Builder | Pro</title>
     <style>
-:root {
-    --pkmn-red: #cc1212; --dark: #1e1e24; --bg: #f0f4f8;
-    --normal: #A8A77A; --fire: #EE8130; --water: #6390F0; --electric: #F7D02C;
-    --grass: #7AC74C; --ice: #96D9D6; --fighting: #C22E28; --poison: #A33EA1;
-    --ground: #E2BF65; --flying: #A98FF3; --psychic: #F95587; --bug: #A6B91A;
-    --rock: #B6A136; --ghost: #735797; --dragon: #6F35FC; --steel: #B7B7CE;
-    --fairy: #D685AD; --dark-type: #705746;
-}
-body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: var(--bg); margin: 0; padding: 40px 20px; padding-bottom: 120px; color: var(--dark); }
-.container { width: 100%; max-width: 1200px; margin: 0 auto; }
-header { background: linear-gradient(135deg, #2c3e50 0%, #000000 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 20px; margin-bottom: 40px; border-bottom: 5px solid var(--pkmn-red); }
+        :root {
+            --pkmn-red: #ff1f1f;
+            --pkmn-blue: #36a8ff;
+            --dark: #0f172a;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            /* Pokémon Types */
+            --normal: #A8A77A; --fire: #EE8130; --water: #6390F0; --electric: #F7D02C;
+            --grass: #7AC74C; --ice: #96D9D6; --fighting: #C22E28; --poison: #A33EA1;
+            --ground: #E2BF65; --flying: #A98FF3; --psychic: #F95587; --bug: #A6B91A;
+            --rock: #B6A136; --ghost: #735797; --dragon: #6F35FC; --steel: #B7B7CE;
+            --fairy: #D685AD; --dark-type: #705746;
+        }
 
-.category-block { margin-bottom: 60px; }
-h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        body { 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+            background-color: var(--bg); 
+            margin: 0; 
+            padding: 0;
+            color: var(--dark);
+            line-height: 1.5;
+        }
 
-.pokemon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .container { 
+            width: 95%; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 40px 0 140px 0;
+        }
 
-.pkmn-card { 
-    background: #ffffff; border-radius: 15px; padding: 20px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; 
-    transition: all 0.2s; display: flex; flex-direction: column; position: relative;
-    cursor: pointer;
-}
-.pkmn-card:hover { transform: translateY(-5px); border-color: #ddd; }
-.pkmn-card.selected { border-color: var(--pkmn-red); background-color: #fffafa; box-shadow: 0 0 15px rgba(238, 21, 21, 0.2); }
+        header { 
+            background: var(--dark);
+            color: white; 
+            padding: 60px 20px; 
+            text-align: center; 
+            border-radius: 24px; 
+            margin-bottom: 50px; 
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
 
-.select-indicator {
-    position: absolute; top: 10px; right: 10px; width: 20px; height: 20px;
-    border-radius: 50%; border: 2px solid #ccc; background: white;
-}
-.selected .select-indicator { background: var(--pkmn-red); border-color: var(--pkmn-red); }
-.selected .select-indicator::after { content: '✓'; color: white; font-size: 12px; display: flex; justify-content: center; align-items: center; }
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, var(--pkmn-red) 0%, transparent 70%);
+            opacity: 0.15;
+        }
 
-.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; padding-right: 25px; }
-.nickname { font-weight: 900; font-size: 1.2rem; display: block; }
-.species { font-size: 0.8rem; color: #7f8c8d; }
-.item-tag { font-size: 0.7rem; background: #f1f2f6; padding: 3px 8px; border-radius: 5px; font-weight: bold; }
-.render-container { width: 100%; height: 130px; display: flex; justify-content: center; align-items: center; margin: 10px 0; pointer-events: none; }
-.render-container img { max-height: 100%; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
-.tera-type { font-size: 0.65rem; text-transform: uppercase; font-weight: 800; padding: 2px 6px; border-radius: 4px; color: white; margin-top: 5px; display: inline-block; }
-.moves-list { list-style: none; padding: 0; margin: 10px 0; border-top: 1px solid #f0f0f0; padding-top: 10px; }
-.moves-list li { font-size: 0.85rem; padding: 2px 0; font-weight: 600; color: #2d3436; }
-.moves-list li::before { content: "• "; color: var(--pkmn-red); }
-.strategy-box { background: #f9f9f9; border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 0.8rem; line-height: 1.4; color: #444; font-style: italic; border-left: 3px solid #ccc; flex-grow: 1; }
-.ability { font-weight: bold; color: #2c3e50; font-size: 0.8rem; display: block; margin-bottom: 4px; }
+        header h1 { 
+            font-size: 2.5rem; 
+            margin: 0; 
+            letter-spacing: -1px; 
+            font-weight: 800;
+        }
 
-#export-panel {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    background: #2c3e50; color: white; padding: 15px 20px;
-    display: flex; justify-content: center; align-items: center; gap: 20px;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.2); z-index: 1000;
-}
-.btn {
-    background: var(--pkmn-red); color: white; border: none; padding: 10px 20px;
-    border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.2s;
-}
-.btn:hover { background: #cc1212; }
-.btn:disabled { background: #7f8c8d; cursor: not-allowed; }
+        header p { opacity: 0.8; font-weight: 500; margin-top: 10px; }
 
-#showdown-output {
-    display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    background: white; color: var(--dark); padding: 30px; border-radius: 15px;
-    width: 90%; max-width: 500px; z-index: 1001; box-shadow: 0 0 50px rgba(0,0,0,0.5);
-}
-#showdown-output textarea { width: 100%; height: 300px; margin-top: 15px; font-family: monospace; padding: 10px; border: 1px solid #ddd; }
-.overlay { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; }
-</style>
+        .category-block { margin-bottom: 50px; }
+
+        h2 { 
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 25px; 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            width: 8px;
+            height: 32px;
+            background: var(--pkmn-red);
+            border-radius: 4px;
+        }
+
+        .pokemon-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 24px; 
+        }
+
+        .pkmn-card { 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            padding: 24px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            border: 2px solid transparent; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+            cursor: pointer;
+        }
+
+        .pkmn-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .pkmn-card.selected { 
+            border-color: var(--pkmn-red); 
+            background-color: #fff;
+            transform: scale(1.02);
+        }
+
+        .select-indicator {
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
+            width: 28px; 
+            height: 28px;
+            border-radius: 50%; 
+            border: 2px solid #e2e8f0; 
+            background: white;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .selected .select-indicator { 
+            background: var(--pkmn-red); 
+            border-color: var(--pkmn-red);
+            color: white;
+        }
+
+        .selected .select-indicator::after { 
+            content: '✓'; 
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .card-header { margin-bottom: 15px; }
+        .nickname { font-weight: 800; font-size: 1.3rem; display: block; color: var(--dark); }
+        .species { font-size: 0.9rem; color: #64748b; font-weight: 500; }
+        
+        .item-tag { 
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.75rem; 
+            background: #f1f5f9; 
+            padding: 4px 10px; 
+            border-radius: 99px; 
+            font-weight: 700; 
+            color: #475569;
+        }
+
+        .render-container { 
+            width: 100%; 
+            height: 140px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 15px 0; 
+            pointer-events: none;
+            background: radial-gradient(circle, #f8fafc 0%, transparent 70%);
+        }
+        
+        .render-container img { 
+            max-height: 100%; 
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); 
+            transition: transform 0.3s;
+        }
+        
+        .pkmn-card:hover .render-container img { transform: scale(1.1); }
+
+        .tera-type { 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            font-weight: 800; 
+            padding: 4px 10px; 
+            border-radius: 6px; 
+            color: white; 
+            display: inline-table;
+            margin-bottom: 15px;
+        }
+
+        .ability { 
+            font-weight: 700; 
+            color: #1e293b; 
+            font-size: 0.85rem; 
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .moves-list { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0 0 15px 0; 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .moves-list li { 
+            font-size: 0.75rem; 
+            padding: 6px 10px; 
+            font-weight: 600; 
+            background: #f8fafc;
+            border-radius: 8px;
+            color: #334155;
+            border: 1px solid #f1f5f9;
+        }
+
+        .strategy-box { 
+            background: #fdf2f2; 
+            border-radius: 12px; 
+            padding: 12px; 
+            font-size: 0.8rem; 
+            color: #7f1d1d; 
+            font-style: italic; 
+            border-left: 4px solid var(--pkmn-red);
+            flex-grow: 1; 
+        }
+
+        #export-panel {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.9); 
+            backdrop-filter: blur(12px);
+            color: white; 
+            padding: 16px 32px; 
+            border-radius: 100px;
+            display: flex; justify-content: center; align-items: center; gap: 30px; 
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); 
+            z-index: 1000;
+            width: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn {
+            background: var(--pkmn-red); color: white; border: none; padding: 12px 24px; 
+            border-radius: 99px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover:not(:disabled) { background: #e01b1b; transform: translateY(-2px); }
+        .btn:active:not(:disabled) { transform: translateY(0); }
+        .btn:disabled { background: #475569; cursor: not-allowed; opacity: 0.5; }
+
+        .btn-secondary { background: #334155; }
+
+        #team-count { font-weight: 700; font-size: 1rem; color: #f1f5f9; }
+
+        #showdown-output {
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: white; color: var(--dark); padding: 32px; border-radius: 24px; 
+            width: 90%; max-width: 550px; z-index: 1001; 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        #showdown-output textarea { 
+            width: 100%; height: 300px; margin-top: 20px; 
+            font-family: 'Fira Code', monospace; font-size: 0.9rem;
+            padding: 15px; border: 1px solid #e2e8f0; border-radius: 12px;
+            background: #f8fafc; resize: none;
+        }
+
+        .overlay { 
+            display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; 
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <header>
         <h1>MY VGC POKÉMON</h1>
-        <p>Select up to 6 to generate a Showdown Team</p>
+        <p>Build your ultimate competitive team</p>
     </header>
 
     <div class="category-block">
-        <h2>Support</h2>
+        <h2>Support & Control</h2>
         <div class="pokemon-grid">
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Yessir</span><span class="species">Indeedee-F</span></div><span class="item-tag">Psychic Seed</span></div>
+                <div class="card-header">
+                    <span class="nickname">Yessir</span>
+                    <span class="species">Indeedee-F</span>
+                    <br><span class="item-tag">Psychic Seed</span>
+                </div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10186.png"></div>
                 <span class="tera-type" style="background: var(--psychic)">Tera: Psychic</span>
                 <span class="ability">Ability: Psychic Surge</span>
                 <ul class="moves-list"><li>Expanding Force</li><li>Follow Me</li><li>Helping Hand</li><li>Trick Room</li></ul>
-                <div class="strategy-box">Sets Psychic Terrain and protects allies.</div>
+                <div class="strategy-box">Sets Psychic Terrain and protects allies with Follow Me.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Fridge</span><span class="species">Farigiraf</span></div><span class="item-tag">Mental Herb</span></div>
+                <div class="card-header">
+                    <span class="nickname">Fridge</span>
+                    <span class="species">Farigiraf</span>
+                    <br><span class="item-tag">Mental Herb</span>
+                </div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/981.png"></div>
                 <span class="tera-type" style="background: var(--normal)">Tera: Normal</span>
                 <span class="ability">Ability: Armor Tail</span>
                 <ul class="moves-list"><li>Psychic Terrain</li><li>Expanding Force</li><li>Trick Room</li><li>Dazzling Gleam</li></ul>
-                <div class="strategy-box">Reliable Trick Room setter; anti-priority.</div>
+                <div class="strategy-box">Reliable Trick Room setter; Armor Tail blocks priority moves.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Brillibrilli</span><span class="species">Hatterene</span></div><span class="item-tag">Light Clay</span></div>
+                <div class="card-header">
+                    <span class="nickname">Brillibrilli</span>
+                    <span class="species">Hatterene</span>
+                    <br><span class="item-tag">Light Clay</span>
+                </div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/858.png"></div>
                 <span class="tera-type" style="background: var(--psychic)">Tera: Psychic</span>
                 <span class="ability">Ability: Magic Bounce</span>
                 <ul class="moves-list"><li>Light Screen</li><li>Reflect</li><li>Magic Powder</li><li>Shadow Ball</li></ul>
-                <div class="strategy-box">Bounces status and sets screens.</div>
+                <div class="strategy-box">Bounces status effects and provides dual screen support.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Lil Guy</span><span class="species">Whimsicott</span></div><span class="item-tag">Focus Sash</span></div>
+                <div class="card-header">
+                    <span class="nickname">Lil Guy</span>
+                    <span class="species">Whimsicott</span>
+                    <br><span class="item-tag">Focus Sash</span>
+                </div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/547.png"></div>
                 <span class="tera-type" style="background: var(--grass)">Tera: Grass</span>
                 <span class="ability">Ability: Prankster</span>
                 <ul class="moves-list"><li>Moonblast</li><li>Giga Drain</li><li>Tailwind</li><li>Taunt</li></ul>
-                <div class="strategy-box">Prankster Tailwind support.</div>
+                <div class="strategy-box">Fastest Tailwind in the game thanks to Prankster.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Family ❤</span><span class="species">Maushold</span></div><span class="item-tag">Wide Lens</span></div>
+                <div class="card-header">
+                    <span class="nickname">Family ❤</span>
+                    <span class="species">Maushold</span>
+                    <br><span class="item-tag">Wide Lens</span>
+                </div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/925.png"></div>
                 <span class="tera-type" style="background: var(--normal)">Tera: Normal</span>
                 <span class="ability">Ability: Friend Guard</span>
                 <ul class="moves-list"><li>Helping Hand</li><li>Population Bomb</li><li>Baby-Doll Eyes</li><li>Tidy Up</li></ul>
-                <div class="strategy-box">Friend Guard reduces damage to allies.</div>
+                <div class="strategy-box">Friend Guard reduces damage taken by your other active Pokémon.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Healer</span><span class="species">Comfey</span></div><span class="item-tag">Big Root</span></div>
+                <div class="card-header">
+                    <span class="nickname">Healer</span>
+                    <span class="species">Comfey</span>
+                    <br><span class="item-tag">Big Root</span>
+                </div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/764.png"></div>
                 <span class="tera-type" style="background: var(--fairy)">Tera: Fairy</span>
                 <span class="ability">Ability: Triage</span>
                 <ul class="moves-list"><li>Leech Seed</li><li>Draining Kiss</li><li>Floral Healing</li><li>Giga Drain</li></ul>
-                <div class="strategy-box">Priority healing with Triage.</div>
+                <div class="strategy-box">Priority healing and drain moves via Triage.</div>
             </div>
         </div>
     </div>
@@ -151,52 +373,52 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
         <div class="pokemon-grid">
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Moone</span><span class="species">Ursaluna</span></div><span class="item-tag">Flame Orb</span></div>
+                <div class="card-header"><span class="nickname">Moone</span><span class="species">Ursaluna</span><br><span class="item-tag">Flame Orb</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/901.png"></div>
                 <span class="tera-type" style="background: var(--normal)">Tera: Normal</span>
                 <span class="ability">Ability: Guts</span>
                 <ul class="moves-list"><li>Facade</li><li>Protect</li><li>Swords Dance</li><li>High Horsepower</li></ul>
-                <div class="strategy-box">Flame Orb + Guts Facade is devastating.</div>
+                <div class="strategy-box">Guts + Facade under Trick Room is almost unblockable.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Dusky</span><span class="species">Lycanroc-Dusk</span></div><span class="item-tag">Muscle Band</span></div>
+                <div class="card-header"><span class="nickname">Dusky</span><span class="species">Lycanroc-Dusk</span><br><span class="item-tag">Muscle Band</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10152.png"></div>
                 <span class="tera-type" style="background: var(--ghost)">Tera: Ghost</span>
                 <span class="ability">Ability: Tough Claws</span>
                 <ul class="moves-list"><li>Accelerock</li><li>Crunch</li><li>Rock Slide</li><li>Iron Head</li></ul>
-                <div class="strategy-box">Tough Claws boosted priority attacks.</div>
+                <div class="strategy-box">High speed cleaner with Tough Claws boosted contact moves.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Crab</span><span class="species">Kingler</span></div><span class="item-tag">Life Orb</span></div>
+                <div class="card-header"><span class="nickname">Crab</span><span class="species">Kingler</span><br><span class="item-tag">Life Orb</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/99.png"></div>
                 <span class="tera-type" style="background: var(--water)">Tera: Water</span>
                 <span class="ability">Ability: Sheer Force</span>
                 <ul class="moves-list"><li>Liquidation</li><li>X-Scissor</li><li>Body Slam</li><li>Double-Edge</li></ul>
-                <div class="strategy-box">Sheer Force Life Orb wallbreaker.</div>
+                <div class="strategy-box">Sheer Force ignores Life Orb recoil for massive damage.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Powerplay</span><span class="species">Corviknight</span></div><span class="item-tag">Rocky Helmet</span></div>
+                <div class="card-header"><span class="nickname">Powerplay</span><span class="species">Corviknight</span><br><span class="item-tag">Rocky Helmet</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/823.png"></div>
                 <span class="tera-type" style="background: var(--flying)">Tera: Flying</span>
                 <span class="ability">Ability: Mirror Armor</span>
                 <ul class="moves-list"><li>Power Trip</li><li>Hone Claws</li><li>Iron Head</li><li>Drill Peck</li></ul>
-                <div class="strategy-box">Stat-boosting win condition with Power Trip.</div>
+                <div class="strategy-box">Scales stats and reflects Intimidate back.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Lisbon</span><span class="species">Scizor</span></div><span class="item-tag">Occa Berry</span></div>
+                <div class="card-header"><span class="nickname">Lisbon</span><span class="species">Scizor</span><br><span class="item-tag">Occa Berry</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/212.png"></div>
                 <span class="tera-type" style="background: var(--steel)">Tera: Steel</span>
                 <span class="ability">Ability: Technician</span>
                 <ul class="moves-list"><li>Acrobatics</li><li>Bullet Punch</li><li>Bug Bite</li><li>Swords Dance</li></ul>
-                <div class="strategy-box">Technician boosted Bullet Punch.</div>
+                <div class="strategy-box">Technician boosted priority Bullet Punch.</div>
             </div>
         </div>
     </div>
@@ -206,52 +428,52 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
         <div class="pokemon-grid">
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Mintage</span><span class="species">Gholdengo</span></div><span class="item-tag">Air Balloon</span></div>
+                <div class="card-header"><span class="nickname">Mintage</span><span class="species">Gholdengo</span><br><span class="item-tag">Air Balloon</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1000.png"></div>
                 <span class="tera-type" style="background: var(--steel)">Tera: Steel</span>
                 <span class="ability">Ability: Good as Gold</span>
                 <ul class="moves-list"><li>Dazzling Gleam</li><li>Make It Rain</li><li>Nasty Plot</li><li>Shadow Ball</li></ul>
-                <div class="strategy-box">Status immunity and heavy spread damage.</div>
+                <div class="strategy-box">Immune to status moves; Make It Rain hits both opponents.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Sploof</span><span class="species">Volcarona</span></div><span class="item-tag">Heavy-Duty Boots</span></div>
+                <div class="card-header"><span class="nickname">Sploof</span><span class="species">Volcarona</span><br><span class="item-tag">Heavy-Duty Boots</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/637.png"></div>
                 <span class="tera-type" style="background: var(--ice)">Tera: Ice</span>
                 <span class="ability">Ability: Flame Body</span>
                 <ul class="moves-list"><li>Tera Blast</li><li>Fiery Dance</li><li>Quiver Dance</li><li>Bug Buzz</li></ul>
-                <div class="strategy-box">Quiver Dance setup sweeper.</div>
+                <div class="strategy-box">One Quiver Dance makes it an unstoppable special threat.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Bubbles</span><span class="species">Primarina</span></div><span class="item-tag">Choice Specs</span></div>
+                <div class="card-header"><span class="nickname">Bubbles</span><span class="species">Primarina</span><br><span class="item-tag">Choice Specs</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/730.png"></div>
                 <span class="tera-type" style="background: var(--water)">Tera: Water</span>
                 <span class="ability">Ability: Liquid Voice</span>
                 <ul class="moves-list"><li>Hyper Voice</li><li>Dazzling Gleam</li><li>Sparkling Aria</li><li>Energy Ball</li></ul>
-                <div class="strategy-box">Liquid Voice Hyper Voice deals huge damage.</div>
+                <div class="strategy-box">Liquid Voice turns Hyper Voice into a Water move.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Flinch</span><span class="species">Togekiss</span></div><span class="item-tag">Assault Vest</span></div>
+                <div class="card-header"><span class="nickname">Flinch</span><span class="species">Togekiss</span><br><span class="item-tag">Assault Vest</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/468.png"></div>
                 <span class="tera-type" style="background: var(--fairy)">Tera: Fairy</span>
                 <span class="ability">Ability: Serene Grace</span>
                 <ul class="moves-list"><li>Air Slash</li><li>Tailwind</li><li>Dazzling Gleam</li><li>Flamethrower</li></ul>
-                <div class="strategy-box">Serene Grace flinch spam.</div>
+                <div class="strategy-box">60% Flinch chance with Air Slash via Serene Grace.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Schrödinger</span><span class="species">Zoroark-Hisui</span></div><span class="item-tag">Spell Tag</span></div>
+                <div class="card-header"><span class="nickname">Schrödinger</span><span class="species">Zoroark-Hisui</span><br><span class="item-tag">Spell Tag</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10240.png"></div>
                 <span class="tera-type" style="background: var(--ghost)">Tera: Ghost</span>
                 <span class="ability">Ability: Illusion</span>
                 <ul class="moves-list"><li>Hex</li><li>Will-O-Wisp</li><li>Hyper Voice</li><li>Protect</li></ul>
-                <div class="strategy-box">Illusion mind games and Hex damage.</div>
+                <div class="strategy-box">Unique Normal/Ghost typing creates incredible immunities.</div>
             </div>
         </div>
     </div>
@@ -261,75 +483,76 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
         <div class="pokemon-grid">
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Stamina</span><span class="species">Archaludon</span></div><span class="item-tag">Leftovers</span></div>
+                <div class="card-header"><span class="nickname">Stamina</span><span class="species">Archaludon</span><br><span class="item-tag">Leftovers</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1018.png"></div>
                 <span class="tera-type" style="background: var(--steel)">Tera: Steel</span>
                 <span class="ability">Ability: Stamina</span>
                 <ul class="moves-list"><li>Protect</li><li>Dragon Pulse</li><li>Flash Cannon</li><li>Body Press</li></ul>
-                <div class="strategy-box">High defense wall with Stamina.</div>
+                <div class="strategy-box">Stamina raises Defense every time it is hit.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Britney</span><span class="species">Gliscor</span></div><span class="item-tag">Toxic Orb</span></div>
+                <div class="card-header"><span class="nickname">Britney</span><span class="species">Gliscor</span><br><span class="item-tag">Toxic Orb</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/472.png"></div>
                 <span class="tera-type" style="background: var(--poison)">Tera: Poison</span>
                 <span class="ability">Ability: Poison Heal</span>
                 <ul class="moves-list"><li>Toxic</li><li>Earthquake</li><li>Roost</li><li>Knock Off</li></ul>
-                <div class="strategy-box">Infinite healing with Poison Heal.</div>
+                <div class="strategy-box">Heals 1/8 HP every turn when Poisoned.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Doublabe</span><span class="species">Doublade</span></div><span class="item-tag">Eviolite</span></div>
+                <div class="card-header"><span class="nickname">Doublabe</span><span class="species">Doublade</span><br><span class="item-tag">Eviolite</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/680.png"></div>
                 <span class="tera-type" style="background: var(--steel)">Tera: Steel</span>
                 <span class="ability">Ability: No Guard</span>
                 <ul class="moves-list"><li>Protect</li><li>Iron Head</li><li>Shadow Claw</li><li>Iron Defense</li></ul>
-                <div class="strategy-box">Eviolite boosted tankiness.</div>
+                <div class="strategy-box">Eviolite makes its Defense higher than most evolved Pokémon.</div>
             </div>
         </div>
     </div>
 
     <div class="category-block">
-        <h2>Pivots</h2>
+        <h2>Strategic Pivots</h2>
         <div class="pokemon-grid">
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Powerhouse</span><span class="species">Incineroar</span></div><span class="item-tag">Sitrus Berry</span></div>
+                <div class="card-header"><span class="nickname">Powerhouse</span><span class="species">Incineroar</span><br><span class="item-tag">Sitrus Berry</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/727.png"></div>
                 <span class="tera-type" style="background: var(--grass)">Tera: Grass</span>
                 <span class="ability">Ability: Intimidate</span>
                 <ul class="moves-list"><li>Fake Out</li><li>Flare Blitz</li><li>U-turn</li><li>Knock Off</li></ul>
-                <div class="strategy-box">Intimidate + Fake Out support.</div>
+                <div class="strategy-box">The King of VGC. Intimidate and Fake Out pressure.</div>
             </div>
 
             <div class="pkmn-card" onclick="togglePokemon(this)">
                 <div class="select-indicator"></div>
-                <div class="card-header"><div><span class="nickname">Air Fryer</span><span class="species">Rotom-Heat</span></div><span class="item-tag">Charcoal</span></div>
+                <div class="card-header"><span class="nickname">Air Fryer</span><span class="species">Rotom-Heat</span><br><span class="item-tag">Charcoal</span></div>
                 <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10008.png"></div>
                 <span class="tera-type" style="background: var(--fire)">Tera: Fire</span>
                 <span class="ability">Ability: Levitate</span>
                 <ul class="moves-list"><li>Volt Switch</li><li>Overheat</li><li>Will-O-Wisp</li><li>Pain Split</li></ul>
-                <div class="strategy-box">Levitate pivot with burn support.</div>
+                <div class="strategy-box">Excellent defensive typing and utility.</div>
             </div>
         </div>
     </div>
 </div>
 
 <div id="export-panel">
-    <button class="btn" id="random-btn" style="margin-right: 20px;">Select 6 Random</button>
+    <button class="btn btn-secondary" id="random-btn">Auto-Pick 6</button>
     <div id="team-count">Selected: 0/6</div>
-    <button class="btn" id="export-btn" disabled onclick="generateShowdown()">Generate Showdown Text</button>
+    <button class="btn" id="export-btn" disabled onclick="generateShowdown()">Export to Showdown</button>
 </div>
 
 <div class="overlay" id="overlay" onclick="closeModal()"></div>
 <div id="showdown-output">
-    <h3 style="margin-top:0">Showdown Export</h3>
+    <h3 style="margin:0; font-weight: 800; font-size: 1.5rem;">Team Export</h3>
+    <p style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Copy this into Pokémon Showdown's Teambuilder</p>
     <textarea id="output-text" readonly></textarea>
-    <div style="margin-top: 15px; display: flex; gap: 10px;">
-        <button class="btn" onclick="copyToClipboard()">Copy to Clipboard</button>
-        <button class="btn" style="background:#7f8c8d" onclick="closeModal()">Close</button>
+    <div style="margin-top: 25px; display: flex; gap: 12px;">
+        <button class="btn" style="flex: 2" onclick="copyToClipboard()">Copy to Clipboard</button>
+        <button class="btn btn-secondary" style="flex: 1" onclick="closeModal()">Close</button>
     </div>
 </div>
 
@@ -391,6 +614,10 @@ function copyToClipboard(){
     const text = document.getElementById("output-text");
     text.select();
     navigator.clipboard.writeText(text.value);
+    const btn = event.target;
+    const oldText = btn.innerText;
+    btn.innerText = "Copied!";
+    setTimeout(() => btn.innerText = oldText, 2000);
 }
 </script>
 
