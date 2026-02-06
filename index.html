@@ -472,6 +472,7 @@
 </div>
 
 <div id="export-panel">
+    <button class="btn" id="random-btn" style="margin-right: 20px;">Select 6 Random</button>
     <div id="team-count">Selected: 0/6</div>
     <button class="btn" id="export-btn" disabled onclick="generateShowdown()">Generate Showdown Text</button>
 </div>
@@ -764,6 +765,29 @@ function buildMoveDex(){
     });
 }
 
+    document.getElementById("random-btn").addEventListener("click", () => {
+    const cards = Array.from(document.querySelectorAll(".pkmn-card"));
+    // deselect all first
+    cards.forEach(c => c.classList.remove("selected"));
+    
+    // shuffle y elegir 6
+    for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+
+    const selected = cards.slice(0, 6);
+    selected.forEach(c => c.classList.add("selected"));
+
+    updateTeamCount();
+});
+
+function updateTeamCount() {
+    const count = document.querySelectorAll(".pkmn-card.selected").length;
+    document.getElementById("team-count").innerText = `Selected: ${count}/6`;
+    document.getElementById("export-btn").disabled = count !== 6;
+}
+
 
 /* Run once page loads */
 window.addEventListener("load", buildMoveDex);
@@ -771,6 +795,7 @@ window.addEventListener("load", buildMoveDex);
 
 </body>
 </html>
+
 
 
 
