@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -76,6 +76,54 @@
         }
         #showdown-output textarea { width: 100%; height: 300px; margin-top: 15px; font-family: monospace; padding: 10px; border: 1px solid #ddd; }
         .overlay { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; }
+        /* MOVE DEX */
+
+#move-dex {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.move-card {
+    background: white;
+    border-radius: 14px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+    border-left: 5px solid var(--pkmn-red);
+}
+
+.move-name {
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+.move-desc {
+    font-size: 0.8rem;
+    margin: 6px 0 10px;
+    color: #444;
+}
+
+.learners {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.learner {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #f2f2f2;
+    border-radius: 6px;
+    padding: 3px 6px;
+    font-size: 0.7rem;
+}
+
+.learner img {
+    width: 28px;
+    height: 28px;
+}
+
     </style>
 </head>
 <body>
@@ -359,6 +407,10 @@
             </div>
         </div>
     </div>
+    <div class="category-block">
+    <h2>Move Encyclopedia</h2>
+    <div id="move-dex"></div>
+</div>
 </div>
 
 <div id="export-panel">
@@ -453,6 +505,132 @@
     );
     alert("Copied to clipboard!");
 }
+/* BASIC MOVE DESCRIPTIONS */
+const moveDescriptions = {
+  "Expanding Force": "A Psychic-type attack that deals massive spread damage and gains a power boost during Psychic Terrain.",
+  "Follow Me": "Redirects all opposing single-target attacks toward the user to protect allies and guarantee safe setup turns.",
+  "Helping Hand": "Boosts an ally's next attack damage by 50%. A premier offensive support move in doubles matches.",
+  "Trick Room": "Reverses the move order for five turns, allowing slower Pokémon to act before faster opponents.",
+  "Psychic Terrain": "Sets terrain for five turns that prevents priority moves and boosts the power of Psychic attacks.",
+  "Dazzling Gleam": "A reliable Fairy-type spread attack that damages both opponents while providing excellent neutral coverage.",
+  "Light Screen": "Reduces damage taken from special attacks for five turns, or eight turns if holding Light Clay.",
+  "Reflect": "Reduces damage taken from physical attacks for five turns, or eight turns if holding Light Clay.",
+  "Magic Powder": "Changes the target's typing to pure Psychic, effectively removing their original resistances and STAB bonuses.",
+  "Shadow Ball": "A Ghost-type special attack that has a chance to lower the target's Special Defense stat.",
+  "Moonblast": "A powerful Fairy-type special attack that has a chance to lower the target's Special Attack stat.",
+  "Giga Drain": "A Grass-type special attack that recovers HP equal to half of the total damage dealt.",
+  "Tailwind": "Summons a gust of wind that doubles the Speed stat of all allied Pokémon for four turns.",
+  "Taunt": "Prevents the target from using any non-damaging status moves for the next three turns of combat.",
+  "Population Bomb": "A multi-hit Normal-type physical attack that can strike the target up to ten times in succession.",
+  "Baby-Doll Eyes": "A priority move that lowers the target's Attack stat before they can execute their own move.",
+  "Tidy Up": "Removes entry hazards and substitutes from the field while boosting the user's Attack and Speed stats.",
+  "Leech Seed": "Plants a seed that drains the target's HP every turn to heal the user's own health.",
+  "Draining Kiss": "A Fairy-type attack that restores the user's health by a large percentage of the damage dealt.",
+  "Floral Healing": "A supportive move that restores a significant portion of the target ally's maximum HP pool.",
+  "Facade": "A Normal-type attack that doubles in power if the user is burned, poisoned, or paralyzed.",
+  "Protect": "Protects the user from all incoming attacks for one turn, though consecutive uses may often fail.",
+  "Swords Dance": "A powerful status move that sharply raises the user's Attack stat by two stages instantly.",
+  "High Horsepower": "A high-accuracy, Ground-type physical attack that deals heavy damage to a single targeted opponent.",
+  "Accelerock": "A specialized Rock-type physical move that strikes with high priority to finish off weakened targets.",
+  "Crunch": "A Dark-type physical attack that has a chance to lower the target's Defense stat on impact.",
+  "Rock Slide": "A Rock-type spread attack that hits both foes and has a chance to cause flinching.",
+  "Iron Head": "A Steel-type physical attack that deals solid damage and has a chance to flinch the target.",
+  "Liquidation": "A Water-type physical attack that hits hard and has a chance to lower the target's Defense.",
+  "X-Scissor": "A straightforward Bug-type physical attack where the user slashes the target with crossed scythes or claws.",
+  "Body Slam": "A Normal-type physical attack that deals damage and has a high chance to paralyze the target.",
+  "Double-Edge": "A high-power Normal-type attack that deals massive damage but also causes significant recoil to the user.",
+  "Power Trip": "A Dark-type attack that increases in base power for every positive stat boost the user possesses.",
+  "Hone Claws": "A status move where the user sharpens their claws to raise both Attack and Accuracy stats.",
+  "Drill Peck": "A reliable Flying-type physical attack where the user strikes the target with a spinning, beak-first dive.",
+  "Make It Rain": "A powerful Steel-type spread attack that deals massive damage but lowers the user's Special Attack stat.",
+  "Nasty Plot": "A dark-themed status move that sharply raises the user's Special Attack stat by two stages.",
+  "Quiver Dance": "A beautiful dance that boosts the user's Special Attack, Special Defense, and Speed stats simultaneously.",
+  "Bug Buzz": "A Bug-type special attack that vibrates the air, with a chance to lower the target's Special Defense.",
+  "Tera Blast": "A versatile move that matches the user's Tera Type and utilizes their highest offensive stat when Terastallized.",
+  "Fiery Dance": "A Fire-type special attack that deals damage and has a high chance to raise Special Attack.",
+  "Hyper Voice": "A Normal-type spread move that uses sound waves to damage both opponents on the battlefield.",
+  "Sparkling Aria": "A Water-type special attack that deals damage and heals the burns of any Pokémon it hits.",
+  "Energy Ball": "A Grass-type special attack that draws power from nature, with a chance to lower Special Defense.",
+  "Air Slash": "A Flying-type special attack that slices the air and has a high chance to flinch opponents.",
+  "Flamethrower": "A reliable Fire-type special attack that deals consistent damage and has a chance to burn targets.",
+  "Dragon Pulse": "A consistent Dragon-type special attack that strikes the target with a powerful shockwave of pure energy.",
+  "Flash Cannon": "A Steel-type special attack that gathers light energy, with a chance to lower the target's Special Defense.",
+  "Body Press": "A physical attack that calculates damage based on the user's Defense stat rather than their Attack.",
+  "Toxic": "A status move that badly poisons the target, causing increasing damage at the end of every turn.",
+  "Earthquake": "A powerful Ground-type spread attack that hits all adjacent Pokémon on the field with massive force.",
+  "Roost": "A recovery move that restores half of the user's HP but removes their Flying-type traits temporarily.",
+  "Knock Off": "Deals increased damage if the target holds an item, which is then removed for the duration.",
+  "Shadow Claw": "A Ghost-type physical attack with a high critical-hit ratio that strikes the target from the shadows.",
+  "Iron Defense": "A Steel-type status move that sharply raises the user's Defense stat by two stages on use.",
+  "Fake Out": "An increased-priority attack that causes the target to flinch, but only works on the first turn.",
+  "Flare Blitz": "A high-power Fire-type physical attack that inflicts recoil damage and has a chance to burn.",
+  "U-turn": "A Bug-type physical attack that allows the user to switch out for a teammate after dealing damage.",
+  "Volt Switch": "An Electric-type special attack that returns the user to their Poké Ball immediately after dealing damage.",
+  "Hydro Pump": "A high-intensity Water-type special attack that deals massive damage but suffers from lower base accuracy.",
+  "Will-O-Wisp": "A Fire-type status move that inflicts a burn, reducing the target's Attack and dealing chip damage.",
+  "Pain Split": "A status move that adds the user's and target's HP together and divides it equally between them."
+};
+
+function buildMoveDex(){
+    const moveMap = {};
+
+    document.querySelectorAll('.pkmn-card').forEach(card=>{
+        const species = card.querySelector('.species').innerText;
+
+        // EXTRAER ID DESDE EL SPRITE HOME
+        const homeSprite = card.querySelector('.render-container img').src;
+        const match = homeSprite.match(/\/(\d+)\.png$/);
+        const dexId = match ? match[1] : null;
+
+        // CONSTRUIR SPRITE 2D
+        const sprite2D = dexId
+          ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dexId}.png`
+          : homeSprite;
+
+        card.querySelectorAll('.moves-list li').forEach(li=>{
+            const move = li.innerText;
+
+            if(!moveMap[move]){
+                moveMap[move] = {
+                    desc: moveDescriptions[move] || "No description available.",
+                    learners: []
+                };
+            }
+
+            moveMap[move].learners.push({
+                species,
+                sprite: sprite2D
+            });
+        });
+    });
+
+    const dex = document.getElementById("move-dex");
+    dex.innerHTML = "";
+
+    Object.keys(moveMap).sort().forEach(move=>{
+        const card = document.createElement("div");
+        card.className = "move-card";
+
+        card.innerHTML = `
+            <div class="move-name">${move}</div>
+            <div class="move-desc">${moveMap[move].desc}</div>
+            <div class="learners">
+                ${moveMap[move].learners.map(p=>`
+                    <div class="learner">
+                        <img src="${p.sprite}">
+                        ${p.species}
+                    </div>
+                `).join("")}
+            </div>
+        `;
+
+        dex.appendChild(card);
+    });
+}
+
+
+/* Run once page loads */
+window.addEventListener("load", buildMoveDex);
 </script>
 
 </body>
