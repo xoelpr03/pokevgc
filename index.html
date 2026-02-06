@@ -87,334 +87,170 @@ h2 { border-left: 5px solid var(--pkmn-red); padding-left: 15px; margin-bottom: 
     </header>
 
     <div class="team-container">
-        <div class="category-block">
-            <h2>Support</h2>
-            <div class="pokemon-grid">
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Yessir</span><span class="species">Indeedee-F</span></div>
-                        <span class="item-tag">Psychic Seed</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10186.png"></div>
-                    <div class="tera-type" style="background: var(--psychic)">Tera Psychic</div>
-                    <ul class="moves-list"><li>Expanding Force</li><li>Follow Me</li><li>Helping Hand</li><li>Trick Room</li></ul>
-                    <div class="strategy-box">The cornerstone of Psychic Terrain strategies. By automatically setting terrain, she shuts down priority moves like Fake Out, Extreme Speed, and Grassy Glide, providing a safe haven for her partners. Psychic Seed boosts her Special Defense immediately upon entry, making her an incredibly bulky redirector. Using Follow Me, she draws attacks away from frail sweepers or Trick Room setters, while Helping Hand allows her to boost a partner's damage output to secure crucial KOs.</div>
-                    <div class="stats-info"><span class="ability">Ability: Psychic Surge</span>Sassy | 248 HP / 8 SpA / 252 SpD</div>
-                </div>
 
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Fridge</span><span class="species">Farigiraf</span></div>
-                        <span class="item-tag">Mental Herb</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/981.png"></div>
-                    <div class="tera-type" style="background: var(--normal)">Tera Normal</div>
-                    <ul class="moves-list"><li>Psychic Terrain</li><li>Expanding Force</li><li>Trick Room</li><li>Dazzling Gleam</li></ul>
-                    <div class="strategy-box">An indispensable anti-meta support Pokémon. Its Armor Tail ability acts as a biological shield, preventing opponents from using any priority moves against the team. This makes it one of the most reliable Trick Room setters in the format, as it cannot be flinched by Fake Out. In Psychic Terrain, its Expanding Force becomes a devastating spread move, and Dazzling Gleam provides necessary coverage against Dark-types that resist its STAB attacks.</div>
-                    <div class="stats-info"><span class="ability">Ability: Armor Tail</span>Quiet | 252 HP / 252 SpA / 4 SpD</div>
-                </div>
+    <div class="category-block">
+        <h2>Support</h2>
+        <div class="pokemon-grid">
 
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Brillibrilli</span><span class="species">Hatterene</span></div>
-                        <span class="item-tag">Light Clay</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/858.png"></div>
-                    <div class="tera-type" style="background: var(--psychic)">Tera Psychic</div>
-                    <ul class="moves-list"><li>Light Screen</li><li>Reflect</li><li>Magic Powder</li><li>Shadow Ball</li></ul>
-                    <div class="strategy-box">A master of defensive utility and field control. Magic Bounce makes her immune to Taunt, Encore, and status moves, reflecting them back at the sender. This set focuses on longevity and team mitigation via Light Screen and Reflect, effectively doubling the team's bulk for eight turns thanks to Light Clay. Magic Powder is her secret weapon, allowing her to change an opponent's type to pure Psychic, stripping away their STAB bonuses and making them vulnerable to Shadow Ball.</div>
-                    <div class="stats-info"><span class="ability">Ability: Magic Bounce</span>Calm | 252 HP / 4 SpA / 252 SpD</div>
-                </div>
-
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Lil Guy</span><span class="species">Whimsicott</span></div>
-                        <span class="item-tag">Focus Sash</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/547.png"></div>
-                    <div class="tera-type" style="background: var(--fairy)">Tera Fairy</div>
-                    <ul class="moves-list"><li>Moonblast</li><li>Giga Drain</li><li>Tailwind</li><li>Taunt</li></ul>
-                    <div class="strategy-box">The ultimate speed control specialist. With the Prankster ability, Whimsicott ensures that Tailwind almost always goes up before the opponent can move, shifting the momentum of the match instantly. Focus Sash is vital to ensure it survives a hit to get off a crucial Taunt or a powerful Moonblast. Its presence on the field forces the opponent to respect the threat of status and immediate speed manipulation.</div>
-                    <div class="stats-info"><span class="ability">Ability: Prankster</span>Timid | 4 Def / 252 SpD / 252 Spe</div>
-                </div>
-
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Family ❤</span><span class="species">Maushold</span></div>
-                        <span class="item-tag">Wide Lens</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10257.png"></div>
-                    <div class="tera-type" style="background: var(--fairy)">Tera Fairy</div>
-                    <ul class="moves-list"><li>Helping Hand</li><li>Population Bomb</li><li>Baby-Doll Eyes</li><li>Tidy Up</li></ul>
-                    <div class="strategy-box">A unique support-offense hybrid. Friend Guard is one of the best abilities in VGC, providing a passive 25% damage reduction to its partner just by being on the field. While it supports with Helping Hand and Baby-Doll Eyes to neuter physical attackers, it remains a massive threat with Population Bomb. When paired with Wide Lens, this move hits up to ten times with high accuracy, alongside increasing Archaludon's defense with Stamina.</div>
-                    <div class="stats-info"><span class="ability">Ability: Friend Guard</span>Jolly | 252 HP / 4 Atk / 252 Spe</div>
-                </div>
-
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Healer</span><span class="species">Comfey</span></div>
-                        <span class="item-tag">Big Root</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/764.png"></div>
-                    <div class="tera-type" style="background: var(--fairy)">Tera Fairy</div>
-                    <ul class="moves-list"><li>Leech Seed</li><li>Draining Kiss</li><li>Floral Healing</li><li>Giga Drain</li></ul>
-                    <div class="strategy-box">The premier "clutch" healer in the game. Thanks to the Triage ability, Comfey gains +3 priority on all healing moves, allowing it to move even before most priority attacks. It can restore a massive amount of a partner's health with Floral Healing before they are even touched. Draining Kiss also gains priority, allowing Comfey to finish off weakened targets and heal itself simultaneously, while Leech Seed provides long-term chip damage and sustain.</div>
-                    <div class="stats-info"><span class="ability">Ability: Triage</span>Calm | 252 HP / 252 Def / 4 SpD</div>
-                </div>
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Yessir</span><span class="species">Indeedee-F</span></div><span class="item-tag">Psychic Seed</span></div>
+                <ul class="moves-list"><li>Expanding Force</li><li>Follow Me</li><li>Helping Hand</li><li>Trick Room</li></ul>
+                <div class="strategy-box">Sets Psychic Terrain, draws hits, and keeps teammates safe. Bulky and boosts allies' damage.</div>
             </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Fridge</span><span class="species">Farigiraf</span></div><span class="item-tag">Mental Herb</span></div>
+                <ul class="moves-list"><li>Psychic Terrain</li><li>Expanding Force</li><li>Trick Room</li><li>Dazzling Gleam</li></ul>
+                <div class="strategy-box">Reliable Trick Room setter, can’t be flinched. Hits hard in Psychic Terrain.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Brillibrilli</span><span class="species">Hatterene</span></div><span class="item-tag">Light Clay</span></div>
+                <ul class="moves-list"><li>Light Screen</li><li>Reflect</li><li>Magic Powder</li><li>Shadow Ball</li></ul>
+                <div class="strategy-box">Bounces status moves, sets screens, and messes with enemy types with Magic Powder.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Lil Guy</span><span class="species">Whimsicott</span></div><span class="item-tag">Focus Sash</span></div>
+                <ul class="moves-list"><li>Moonblast</li><li>Giga Drain</li><li>Tailwind</li><li>Taunt</li></ul>
+                <div class="strategy-box">Speed control king. Prankster Tailwind first, survives hits, can disrupt enemies.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Family ❤</span><span class="species">Maushold</span></div><span class="item-tag">Wide Lens</span></div>
+                <ul class="moves-list"><li>Helping Hand</li><li>Population Bomb</li><li>Baby-Doll Eyes</li><li>Tidy Up</li></ul>
+                <div class="strategy-box">Supports with Friend Guard and Helping Hand, but Population Bomb can wipe stuff.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Healer</span><span class="species">Comfey</span></div><span class="item-tag">Big Root</span></div>
+                <ul class="moves-list"><li>Leech Seed</li><li>Draining Kiss</li><li>Floral Healing</li><li>Giga Drain</li></ul>
+                <div class="strategy-box">Priority healer with Triage. Keeps teammates alive and chips damage back.</div>
+            </div>
+
         </div>
+    </div>
 
-        <div class="category-block">
-            <h2>Physical Sweepers</h2>
-            <div class="pokemon-grid">
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Moone</span><span class="species">Ursaluna</span></div>
-                        <span class="item-tag">Flame Orb</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/901.png"></div>
-                    <div class="tera-type" style="background: var(--normal)">Tera Normal</div>
-                    <ul class="moves-list"><li>Facade</li><li>Protect</li><li>Swords Dance</li><li>High Horsepower</li></ul>
-                    <div class="strategy-box">The definition of a "TR Monster." Once the Flame Orb activates at the end of turn one, Ursaluna becomes a terrifying force. The Guts boost, combined with its naturally high Attack and a Tera Normal Facade, allows it to one-shot almost anything that doesn't have a resistance. In Trick Room, it moves first and exerts pressure that very few teams can withstand, using High Horsepower to crush Steel and Rock types that try to wall its Facade.</div>
-                    <div class="stats-info"><span class="ability">Ability: Guts</span>Brave | 252 HP / 252 Atk / 4 Def</div>
-                </div>
+    <div class="category-block">
+        <h2>Physical Sweepers</h2>
+        <div class="pokemon-grid">
 
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Dusky</span><span class="species">Lycanroc-Dusk</span></div>
-                        <span class="item-tag">Muscle Band</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10152.png"></div>
-                    <div class="tera-type" style="background: var(--ghost)">Tera Ghost</div>
-                    <ul class="moves-list"><li>Accelerock</li><li>Crunch</li><li>Rock Slide</li><li>Iron Head</li></ul>
-                    <div class="strategy-box">A high-speed cleaner that excels at picking off weakened targets. Tough Claws provides a massive boost to contact moves, making Accelerock one of the strongest priority moves in the game. Tera Ghost is used defensively to bypass Fake Out and Fighting-type moves, allowing Lycanroc to stay on the field and spread damage with Rock Slide or snipe Fairy-types with Iron Head.</div>
-                    <div class="stats-info"><span class="ability">Ability: Tough Claws</span>Jolly | 252 Atk / 4 SpD / 252 Spe</div>
-                </div>
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Moone</span><span class="species">Ursaluna</span></div><span class="item-tag">Flame Orb</span></div>
+                <ul class="moves-list"><li>Facade</li><li>Protect</li><li>Swords Dance</li><li>High Horsepower</li></ul>
+                <div class="strategy-box">TR monster. Guts + Flame Orb makes Facade hit crazy hard. High Horsepower handles steel/rock.</div>
+            </div>
 
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Crab</span><span class="species">Kingler</span></div>
-                        <span class="item-tag">Life Orb</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/99.png"></div>
-                    <div class="tera-type" style="background: var(--water)">Tera Water</div>
-                    <ul class="moves-list"><li>Liquidation</li><li>X-Scissor</li><li>Body Slam</li><li>Double-Edge</li></ul>
-                    <div class="strategy-box">A sleeper threat that utilizes the Sheer Force and Life Orb interaction. This combination allows Kingler to deal massive damage with Liquidation and X-Scissor without taking Life Orb recoil. While its Speed is middling, its Physical Attack is sky-high. Body Slam and Double-Edge provide neutral coverage, making Kingler a specialized wall-breaker that can punch holes in defensive cores.</div>
-                    <div class="stats-info"><span class="ability">Ability: Sheer Force</span>Adamant | 252 Atk / 4 Def / 252 SpD</div>
-                </div>
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Dusky</span><span class="species">Lycanroc-Dusk</span></div><span class="item-tag">Muscle Band</span></div>
+                <ul class="moves-list"><li>Accelerock</li><li>Crunch</li><li>Rock Slide</li><li>Iron Head</li></ul>
+                <div class="strategy-box">Fast cleanup dude. Tough Claws boosts priority hits, Tera Ghost adds defense.</div>
+            </div>
 
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Powerplay</span><span class="species">Corviknight</span></div>
-                        <span class="item-tag">Rocky Helmet</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/823.png"></div>
-                    <div class="tera-type" style="background: var(--flying)">Tera Flying</div>
-                    <ul class="moves-list"><li>Power Trip</li><li>Hone Claws</li><li>Iron Head</li><li>Drill Peck</li></ul>
-                    <div class="strategy-box">A snowballing win-condition. By utilizing Hone Claws, Corviknight simultaneously boosts its Attack and ensures that Power Trip becomes stronger with every stat increase. Mirror Armor protects it from Intimidate and other stat-dropping moves, reflecting them back at the opponent. Once it gains a few boosts, Power Trip becomes a high-base-power Dark move that can sweep through entire teams, while Drill Peck provides consistent STAB.</div>
-                    <div class="stats-info"><span class="ability">Ability: Mirror Armor</span>Adamant | 248 HP / 252 Atk / 8 SpD</div>
-                </div>
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-    <div class="select-indicator"></div>
-    <div class="card-header">
-        <div>
-            <span class="nickname">Lisbon</span>
-            <span class="species">Scizor</span>
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Crab</span><span class="species">Kingler</span></div><span class="item-tag">Life Orb</span></div>
+                <ul class="moves-list"><li>Liquidation</li><li>X-Scissor</li><li>Body Slam</li><li>Double-Edge</li></ul>
+                <div class="strategy-box">Wall-breaker with Sheer Force + Life Orb. Hits hard and covers everything.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Powerplay</span><span class="species">Corviknight</span></div><span class="item-tag">Rocky Helmet</span></div>
+                <ul class="moves-list"><li>Power Trip</li><li>Hone Claws</li><li>Iron Head</li><li>Drill Peck</li></ul>
+                <div class="strategy-box">Boosts itself with Hone Claws + Power Trip. Mirror Armor protects boosts, Drill Peck for safe STAB.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Lisbon</span><span class="species">Scizor</span></div><span class="item-tag">Occa Berry</span></div>
+                <ul class="moves-list"><li>Acrobatics</li><li>Bullet Punch</li><li>Bug Bite</li><li>Swords Dance</li></ul>
+                <div class="strategy-box">Tech priority. Occa Berry for safe Swords Dance, Acrobatics & Tera Bug destroy bulky foes.</div>
+            </div>
+
         </div>
-        <span class="item-tag">Occa Berry</span>
     </div>
 
-    <div class="render-container">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/212.png">
+    <div class="category-block">
+        <h2>Special Sweepers</h2>
+        <div class="pokemon-grid">
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Mintage</span><span class="species">Gholdengo</span></div><span class="item-tag">Air Balloon</span></div>
+                <ul class="moves-list"><li>Dazzling Gleam</li><li>Make It Rain</li><li>Nasty Plot</li><li>Shadow Ball</li></ul>
+                <div class="strategy-box">Status immune with Good as Gold, sets Nasty Plot safely. Spread damage with Make It Rain.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Sploof</span><span class="species">Volcarona</span></div><span class="item-tag">Heavy-Duty Boots</span></div>
+                <ul class="moves-list"><li>Tera Blast</li><li>Fiery Dance</li><li>Quiver Dance</li><li>Bug Buzz</li></ul>
+                <div class="strategy-box">Setup sweeper. Quiver Dance + Flame Body punishes physicals. Tera Ice for counter traps.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Bubbles</span><span class="species">Primarina</span></div><span class="item-tag">Choice Specs</span></div>
+                <ul class="moves-list"><li>Hyper Voice</li><li>Dazzling Gleam</li><li>Sparkling Aria</li><li>Energy Ball</li></ul>
+                <div class="strategy-box">Spread attacker. Liquid Voice makes Hyper Voice Water-type, boosted by Specs. Sparkling Aria hits singles.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Flinch</span><span class="species">Togekiss</span></div><span class="item-tag">Assault Vest</span></div>
+                <ul class="moves-list"><li>Air Slash</li><li>Tailwind</li><li>Dazzling Gleam</li><li>Flamethrower</li></ul>
+                <div class="strategy-box">Bulky special with flinch spam. Tailwind + Dazzling Gleam support teammates.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Schrödinger</span><span class="species">Zoroark-Hisui</span></div><span class="item-tag">Spell Tag</span></div>
+                <ul class="moves-list"><li>Hex</li><li>Will-O-Wisp</li><li>Hyper Voice</li><li>Protect</li></ul>
+                <div class="strategy-box">Burn + Hex hits hard. Spell Tag boosts damage, Hyper Voice spreads damage through subs.</div>
+            </div>
+
+        </div>
     </div>
 
-    <div class="tera-type" style="background: var(--bug)">Tera Bug</div>
+    <div class="category-block">
+        <h2>Defensive Walls</h2>
+        <div class="pokemon-grid">
 
-    <ul class="moves-list">
-        <li>Acrobatics</li>
-        <li>Bullet Punch</li>
-        <li>Bug Bite</li>
-        <li>Swords Dance</li>
-    </ul>
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Stamina</span><span class="species">Archaludon</span></div><span class="item-tag">Leftovers</span></div>
+                <ul class="moves-list"><li>Protect</li><li>Dragon Pulse</li><li>Flash Cannon</li><li>Body Press</li></ul>
+                <div class="strategy-box">Physical wall. Stamina boosts Defense every hit, Body Press gets stronger over time.</div>
+            </div>
 
-    <div class="strategy-box">
-        A classic physical win-condition with modern spice. Technician boosts the power of Bullet Punch and Bug Bite, turning Scizor into a terrifying priority attacker. Occa Berry lets it survive a crucial Fire-type hit, often allowing it to set up Swords Dance safely. After a boost, Acrobatics becomes a strong coverage option once the berry is consumed, while Tera Bug massively amplifies Bug Bite to shred bulky targets.
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Britney</span><span class="species">Gliscor</span></div><span class="item-tag">Toxic Orb</span></div>
+                <ul class="moves-list"><li>Toxic</li><li>Earthquake</li><li>Roost</li><li>Knock Off</li></ul>
+                <div class="strategy-box">Long game queen. Poison Heal keeps it healthy, Toxic + Knock Off grind enemies down.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Doublabe</span><span class="species">Doublade</span></div><span class="item-tag">Eviolite</span></div>
+                <ul class="moves-list"><li>Protect</li><li>Iron Head</li><li>Shadow Claw</li><li>Iron Defense</li></ul>
+                <div class="strategy-box">Eviolite tank. Super bulky, uses Iron Defense to survive and hits back hard.</div>
+            </div>
+
+        </div>
     </div>
 
-    <div class="stats-info">
-        <span class="ability">Ability: Technician</span>
-        Adamant | 248 HP / 252 Atk / 8 SpD
+    <div class="category-block">
+        <h2>Pivots</h2>
+        <div class="pokemon-grid">
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Powerhouse</span><span class="species">Incineroar</span></div><span class="item-tag">Sitrus Berry</span></div>
+                <ul class="moves-list"><li>Fake Out</li><li>Flare Blitz</li><li>U-turn</li><li>Knock Off</li></ul>
+                <div class="strategy-box">Best VGC pivot. Intimidate + Fake Out, U-turn to reset, Tera Grass dodges attacks.</div>
+            </div>
+
+            <div class="pkmn-card" onclick="togglePokemon(this)">
+                <div class="card-header"><div><span class="nickname">Air Fryer</span><span class="species">Rotom-Heat</span></div><span class="item-tag">Charcoal</span></div>
+                <ul class="moves-list"><li>Volt Switch</li><li>Overheat</li><li>Will-O-Wisp</li><li>Pain Split</li></ul>
+                <div class="strategy-box">Versatile pivot. Levitate avoids ground hits, Volt Switch moves the team, Will-O-Wisp cripples sweepers.</div>
+            </div>
+
+        </div>
     </div>
+
 </div>
 
-            </div>
-        </div>
-
-        <div class="category-block">
-            <h2>Special Sweepers</h2>
-            <div class="pokemon-grid">
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Mintage</span><span class="species">Gholdengo</span></div>
-                        <span class="item-tag">Air Balloon</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1000.png"></div>
-                    <div class="tera-type" style="background: var(--steel)">Tera Steel</div>
-                    <ul class="moves-list"><li>Dazzling Gleam</li><li>Make It Rain</li><li>Nasty Plot</li><li>Shadow Ball</li></ul>
-                    <div class="strategy-box">The king of consistency. The Good as Gold ability makes it completely immune to all status moves, meaning it cannot be put to sleep, paralyzed, or Taunted. This allows it to safely set up Nasty Plot. Its signature move, Make It Rain, deals massive spread damage, while the Air Balloon covers its most common weakness to Ground. It is the gold standard for special offense in VGC.</div>
-                    <div class="stats-info"><span class="ability">Ability: Good as Gold</span>Timid | 252 SpA / 4 SpD / 252 Spe</div>
-                </div>
-
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Sploof</span><span class="species">Volcarona</span></div>
-                        <span class="item-tag">Heavy-Duty Boots</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/637.png"></div>
-                    <div class="tera-type" style="background: var(--ice)">Tera Ice</div>
-                    <ul class="moves-list"><li>Tera Blast</li><li>Fiery Dance</li><li>Quiver Dance</li><li>Bug Buzz</li></ul>
-                    <div class="strategy-box">A dangerous setup sweeper that punishes physical attackers with Flame Body. After a single Quiver Dance, Volcarona becomes faster and harder to kill on the special side. This set uses Tera Ice and Tera Blast as a "trap" for common counters like Landorus or Garchomp. Fiery Dance provides a high chance to further increase its Special Attack, allowing it to spiral out of control very quickly.</div>
-                    <div class="stats-info"><span class="ability">Ability: Flame Body</span>Modest | 252 SpA / 4 SpD / 252 Spe</div>
-                </div>
-
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Bubbles</span><span class="species">Primarina</span></div>
-                        <span class="item-tag">Choice Specs</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/730.png"></div>
-                    <div class="tera-type" style="background: var(--water)">Tera Water</div>
-                    <ul class="moves-list"><li>Hyper Voice</li><li>Dazzling Gleam</li><li>Sparkling Aria</li><li>Energy Ball</li></ul>
-                    <div class="strategy-box">A powerful spread attacker with excellent defensive typing. Liquid Voice turns Hyper Voice into a Water-type move, allowing Primarina to bypass Substitute and hit both opponents for STAB damage, further boosted by Choice Specs. For situations where spread damage is reduced, Sparkling Aria provides a massive single-target nuke. Energy Ball rounds out the set to handle opposing Water or Gastrodon leads.</div>
-                    <div class="stats-info"><span class="ability">Ability: Liquid Voice</span>Modest | 252 HP / 252 SpA / 4 SpD</div>
-                </div>
-
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Flinch</span><span class="species">Togekiss</span></div>
-                        <span class="item-tag">Assault Vest</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/468.png"></div>
-                    <div class="tera-type" style="background: var(--fairy)">Tera Fairy</div>
-                    <ul class="moves-list"><li>Air Slash</li><li>Tailwind</li><li>Dazzling Gleam</li><li>Flamethrower</li></ul>
-                    <div class="strategy-box">A bulky special attacker that relies on the infamous Serene Grace + Air Slash combo. With a 60% flinch chance, Togekiss can effectively "stun-lock" opponents, preventing them from playing the game. Assault Vest allows it to trade hits with almost any special attacker in the format, while Tailwind and Dazzling Gleam provide the utility needed to support the rest of the team while maintaining offensive pressure.</div>
-                    <div class="stats-info"><span class="ability">Ability: Serene Grace</span>Modest | 252 HP / 252 SpA / 4 SpD</div>
-                </div>
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div>
-                            <span class="nickname">Schrödinger</span>
-                            <span class="species">Zoroark-Hisui</span>
-                        </div>
-                        <span class="item-tag">Spell Tag</span>
-                    </div>
-                    <div class="render-container">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10239.png">
-                    </div>
-                    <div class="tera-type" style="background: var(--normal)">Tera Normal</div>
-                    <ul class="moves-list">
-                        <li>Hex</li>
-                        <li>Will-O-Wisp</li>
-                        <li>Hyper Voice</li>
-                        <li>Protect</li>
-                    </ul>
-                    <div class="strategy-box">A deceptive utility-attacker. This set relies on the devastating synergy between Will-O-Wisp and Hex; by burning the target, Zoroark not only neuters physical attackers but also doubles Hex's base power to 130. Combined with a Spell Tag, it hits incredibly hard despite the defensive EV investment. The max HP and Speed allow it to survive long enough to spread status, while Hyper Voice provides reliable spread damage that hits through Substitutes.</div>
-                    <div class="stats-info"><span class="ability">Ability: Illusion</span>Timid | 252 HP / 4 SpA / 252 Spe</div>
-                </div>
-                </div>
-        </div>
-
-        <div class="category-block">
-            <h2>Defensive Walls</h2>
-            <div class="pokemon-grid">
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Stamina</span><span class="species">Archaludon</span></div>
-                        <span class="item-tag">Leftovers</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1018.png"></div>
-                    <div class="tera-type" style="background: var(--steel)">Tera Steel</div>
-                    <ul class="moves-list"><li>Protect</li><li>Dragon Pulse</li><li>Flash Cannon</li><li>Body Press</li></ul>
-                    <div class="strategy-box">A physical wall that gets stronger the more it is attacked. Every time Archaludon takes a hit, Stamina raises its Defense by one stage. This makes Body Press increasingly lethal as the game progresses. With a Bold nature and max Defense investment, it is nearly impossible to KO with physical moves, while its Steel/Dragon typing provides a plethora of resistances.</div>
-                    <div class="stats-info"><span class="ability">Ability: Stamina</span>Bold | 252 Def / 252 SpA / 4 SpD</div>
-                </div>
-
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Britney</span><span class="species">Gliscor</span></div>
-                        <span class="item-tag">Toxic Orb</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/472.png"></div>
-                    <div class="tera-type" style="background: var(--ground)">Tera Ground</div>
-                    <ul class="moves-list"><li>Toxic</li><li>Earthquake</li><li>Roost</li><li>Knock Off</li></ul>
-                    <div class="strategy-box">The master of the long game. Once its Toxic Orb activates, Poison Heal provides more recovery per turn than Leftovers, and it becomes immune to other status conditions like Sleep or Freeze. Gliscor excels at outlasting opponents through a combination of Roost and Protect. It spreads status with Toxic and removes crucial items with Knock Off, slowly grinding the opposing team down to zero resources.</div>
-                    <div class="stats-info"><span class="ability">Ability: Poison Heal</span>Impish | 252 HP / 184 Def / 72 Spe</div>
-                </div>
-
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Doublabe</span><span class="species">Doublade</span></div>
-                        <span class="item-tag">Eviolite</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/680.png"></div>
-                    <div class="tera-type" style="background: var(--steel)">Tera Steel</div>
-                    <ul class="moves-list"><li>Protect</li><li>Iron Head</li><li>Shadow Claw</li><li>Iron Defense</li></ul>
-                    <div class="strategy-box">An Eviolite user with a Defense stat that rivals many Legendary Pokémon. While Aegislash is more common, Doublade's raw physical bulk with Eviolite is superior. It uses Iron Defense to reach unreachable levels of physical resilience, making its Iron Head and Shadow Claw hits surprisingly hard. Careful nature and SpD investment help it survive on the special side while it walls every physical threat on the board.</div>
-                    <div class="stats-info"><span class="ability">Ability: No Guard</span>Careful | 252 HP / 4 Atk / 252 SpD</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="category-block">
-            <h2>Pivots</h2>
-            <div class="pokemon-grid">
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Powerhouse</span><span class="species">Incineroar</span></div>
-                        <span class="item-tag">Sitrus Berry</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/727.png"></div>
-                    <div class="tera-type" style="background: var(--grass)">Tera Grass</div>
-                    <ul class="moves-list"><li>Fake Out</li><li>Flare Blitz</li><li>U-turn</li><li>Knock Off</li></ul>
-                    <div class="strategy-box">Widely considered the best Pokémon in VGC history. Incineroar provides unparalleled utility through the combination of Intimidate and Fake Out. It can cycle in and out of the field using U-turn to reset its Intimidate drop, while Flare Blitz and Knock Off provide respectable damage and utility. Tera Grass is used to dodge Spore and Ground-type attacks, ensuring Incineroar stays on the field to control the pace of the match.</div>
-                    <div class="stats-info"><span class="ability">Ability: Intimidate</span>Adamant | 252 Atk / 4 Def / 252 SpD</div>
-                </div>
-
-                <div class="pkmn-card" onclick="togglePokemon(this)">
-                    <div class="select-indicator"></div>
-                    <div class="card-header">
-                        <div><span class="nickname">Air Fryer</span><span class="species">Rotom-Heat</span></div>
-                        <span class="item-tag">Charcoal</span>
-                    </div>
-                    <div class="render-container"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10008.png"></div>
-                    <div class="tera-type" style="background: var(--fire)">Tera Fire</div>
-                    <ul class="moves-list"><li>Volt Switch</li><li>Overheat</li><li>Will-O-Wisp</li><li>Pain Split</li></ul>
-                    <div class="strategy-box">A versatile pivot that fits on almost any team. Levitate gives it a crucial immunity to Ground-type moves, leaving it with very few weaknesses. It excels at neutralizing physical sweepers with Will-O-Wisp and repositioning the team with Volt Switch. Overheat provides the high-power burst needed to threaten Grass and Ice types, while Pain Split gives it a form of recovery to stay in the fight.</div>
-                    <div class="stats-info"><span class="ability">Ability: Levitate</span>Bold | 248 HP / 252 Def / 8 SpD</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div id="export-panel">
     <button class="btn" id="random-btn" style="margin-right: 20px;">Select 6 Random</button>
@@ -508,6 +344,7 @@ function copyToClipboard(){
 
 </body>
 </html>
+
 
 
 
