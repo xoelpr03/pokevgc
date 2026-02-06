@@ -123,6 +123,9 @@
     width: 28px;
     height: 28px;
 }
+.move-physical { color: #e74c3c; }   /* red */
+.move-special  { color: #3498db; }   /* blue */
+.move-status   { color: #2ecc71; }   /* green */
 
     </style>
 </head>
@@ -485,6 +488,79 @@
 </div>
 
 <script>
+    const moveCategories = {
+  /* STATUS */
+  "Follow Me": "status",
+  "Helping Hand": "status",
+  "Trick Room": "status",
+  "Psychic Terrain": "status",
+  "Light Screen": "status",
+  "Reflect": "status",
+  "Magic Powder": "status",
+  "Tailwind": "status",
+  "Taunt": "status",
+  "Baby-Doll Eyes": "status",
+  "Tidy Up": "status",
+  "Leech Seed": "status",
+  "Floral Healing": "status",
+  "Protect": "status",
+  "Swords Dance": "status",
+  "Hone Claws": "status",
+  "Nasty Plot": "status",
+  "Quiver Dance": "status",
+  "Roost": "status",
+  "Toxic": "status",
+  "Iron Defense": "status",
+  "Will-O-Wisp": "status",
+  "Pain Split": "status",
+
+  /* PHYSICAL */
+  "Population Bomb": "physical",
+  "Facade": "physical",
+  "High Horsepower": "physical",
+  "Accelerock": "physical",
+  "Crunch": "physical",
+  "Rock Slide": "physical",
+  "Iron Head": "physical",
+  "Liquidation": "physical",
+  "X-Scissor": "physical",
+  "Body Slam": "physical",
+  "Double-Edge": "physical",
+  "Power Trip": "physical",
+  "Drill Peck": "physical",
+  "Bug Bite": "physical",
+  "Bullet Punch": "physical",
+  "Knock Off": "physical",
+  "U-turn": "physical",
+  "Flare Blitz": "physical",
+  "Shadow Claw": "physical",
+  "Earthquake": "physical",
+  "Body Press": "physical",
+  "Acrobatics": "physical",
+
+  /* SPECIAL */
+  "Expanding Force": "special",
+  "Dazzling Gleam": "special",
+  "Shadow Ball": "special",
+  "Moonblast": "special",
+  "Giga Drain": "special",
+  "Draining Kiss": "special",
+  "Make It Rain": "special",
+  "Bug Buzz": "special",
+  "Tera Blast": "special",
+  "Fiery Dance": "special",
+  "Hyper Voice": "special",
+  "Sparkling Aria": "special",
+  "Energy Ball": "special",
+  "Air Slash": "special",
+  "Flamethrower": "special",
+  "Dragon Pulse": "special",
+  "Flash Cannon": "special",
+  "Volt Switch": "special",
+  "Overheat": "special",
+  "Hex": "special"
+};
+
     let selectedPokemon = [];
 
     function togglePokemon(card) {
@@ -673,7 +749,7 @@ function buildMoveDex(){
         card.className = "move-card";
 
         card.innerHTML = `
-            <div class="move-name">${move}</div>
+            <div class="move-name move-${moveCategories[move] || "status"}">${move}</div>
             <div class="move-desc">${moveMap[move].desc}</div>
             <div class="learners">
                 ${moveMap[move].learners.map(p=>`
@@ -696,6 +772,7 @@ window.addEventListener("load", buildMoveDex);
 
 </body>
 </html>
+
 
 
 
