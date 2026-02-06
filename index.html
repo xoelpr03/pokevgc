@@ -564,20 +564,21 @@
 
     let selectedPokemon = [];
 
-    function togglePokemon(card) {
-        if (card.classList.contains('selected')) {
-            card.classList.remove('selected');
-            selectedPokemon = selectedPokemon.filter(p => p !== card);
+    function togglePokemon(card, force = false){
+    if(force) {
+        card.classList.add("selected");
+    } else {
+        if(card.classList.contains("selected")){
+            card.classList.remove("selected");
         } else {
-            if (selectedPokemon.length >= 6) {
-                alert("Team is full! Max 6 Pokémon.");
-                return;
+            if(document.querySelectorAll(".pkmn-card.selected").length < 6){
+                card.classList.add("selected");
             }
-            card.classList.add('selected');
-            selectedPokemon.push(card);
         }
-        updateUI();
     }
+    updateTeamCount();
+}
+
 
     function updateUI() {
         document.getElementById('team-count').innerText = `Selected: ${selectedPokemon.length}/6`;
@@ -767,26 +768,21 @@ function buildMoveDex(){
 
     document.getElementById("random-btn").addEventListener("click", () => {
     const cards = Array.from(document.querySelectorAll(".pkmn-card"));
-    // deselect all first
-    cards.forEach(c => c.classList.remove("selected"));
     
-    // shuffle y elegir 6
+    // Deseleccionar todo primero usando togglePokemon si está seleccionado
+    cards.forEach(c => {
+        if (c.classList.contains("selected")) togglePokemon(c, true); // true = forzar deselección
+    });
+
+    // Mezclar y elegir 6
     for (let i = cards.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [cards[i], cards[j]] = [cards[j], cards[i]];
     }
 
     const selected = cards.slice(0, 6);
-    selected.forEach(c => c.classList.add("selected"));
-
-    updateTeamCount();
+    selected.forEach(c => togglePokemon(c, true)); // true = forzar selección
 });
-
-function updateTeamCount() {
-    const count = document.querySelectorAll(".pkmn-card.selected").length;
-    document.getElementById("team-count").innerText = `Selected: ${count}/6`;
-    document.getElementById("export-btn").disabled = count !== 6;
-}
 
 
 /* Run once page loads */
@@ -795,6 +791,7 @@ window.addEventListener("load", buildMoveDex);
 
 </body>
 </html>
+
 
 
 
