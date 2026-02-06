@@ -595,7 +595,8 @@ function generateShowdown(){
         const species = c.querySelector(".species").innerText.trim();
         const item = c.querySelector(".item-tag").innerText.trim();
         const ability = c.querySelector(".ability").innerText.split(":")[1].trim();
-        const tera = c.querySelector(".tera-type").innerText.trim(); // clean type
+const tera = c.querySelector(".tera-type").innerText.trim().toLowerCase();
+
 
         const gender = c.getAttribute("data-gender") ? ` (${c.getAttribute("data-gender")})` : "";
         const evs = c.getAttribute("data-evs") || "252 HP / 252 Atk / 4 SpD";
@@ -637,3 +638,4 @@ function copyToClipboard(){
 
 </body>
 </html>
+
