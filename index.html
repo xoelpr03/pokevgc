@@ -595,7 +595,9 @@ function generateShowdown(){
         const species = c.querySelector(".species").innerText.trim();
         const item = c.querySelector(".item-tag").innerText.trim();
         const ability = c.querySelector(".ability").innerText.split(":")[1].trim();
-const tera = c.querySelector(".tera-type").innerText.trim().toLowerCase();
+const tera = c.querySelector(".tera-type").innerText.trim();
+const teraFormatted = tera.charAt(0).toUpperCase() + tera.slice(1).toLowerCase();
+
 
 
         const gender = c.getAttribute("data-gender") ? ` (${c.getAttribute("data-gender")})` : "";
@@ -609,7 +611,7 @@ const tera = c.querySelector(".tera-type").innerText.trim().toLowerCase();
 
         output += `${nick} (${species})${gender} @ ${item}\n`;
         output += `Ability: ${ability}\n`;
-        output += `Tera Type: ${tera}\n`;
+       output += `Tera Type: ${teraFormatted}\n`;
         output += `EVs: ${evs}\n`;
         output += `${nature} Nature\n`;
         if(ivs) output += `IVs: ${ivs}\n`;
@@ -638,4 +640,5 @@ function copyToClipboard(){
 
 </body>
 </html>
+
 
