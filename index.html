@@ -755,7 +755,6 @@ function buildMoveDex(){
                 ${moveMap[move].learners.map(p=>`
                     <div class="learner">
                         <img src="${p.sprite}">
-                        ${p.species}
                     </div>
                 `).join("")}
             </div>
@@ -772,6 +771,7 @@ window.addEventListener("load", buildMoveDex);
 
 </body>
 </html>
+
 
 
 
