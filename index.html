@@ -486,7 +486,7 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
   </div>
 
   <div class="category-block">
-    <h2>Strategic Pivots</h2>
+    <h2>Pivots & Other</h2>
     <div class="pokemon-grid">
       <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Careful">
         <div class="select-indicator"></div>
@@ -529,6 +529,26 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
         </ul>
         <div class="strategy-box">Excellent defensive typing and utility.</div>
       </div>
+      <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Quiet" data-evs="252 HP / 252 SpA / 4 SpD" data-ivs="0 Spe">
+  <div class="select-indicator"></div>
+  <div class="card-header">
+    <span class="nickname">Spike</span>
+    <span class="species">Pincurchin</span><br>
+    <span class="item-tag">Electric Seed</span>
+  </div>
+  <div class="render-container">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/871.png">
+  </div>
+  <span class="tera-type" style="background: var(--flying)">Flying</span>
+  <span class="ability">Ability: Electric Surge</span>
+  <ul class="moves-list">
+    <li>Zing Zap</li>
+    <li>Tera Blast</li>
+    <li>Recover</li>
+    <li>Protect</li>
+  </ul>
+  <div class="strategy-box">Quiet Nature + 0 Speed IVs makes it a "fast" threat in Trick Room.</div>
+</div>
     </div>
   </div>
 </div>
