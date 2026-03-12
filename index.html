@@ -56,6 +56,46 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
 #showdown-output { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; color:var(--dark); padding:32px; border-radius:24px; width:90%; max-width:550px; z-index:1001; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);}
 #showdown-output textarea { width:100%; height:300px; margin-top:20px; font-family:'Fira Code', monospace; font-size:0.9rem; padding:15px; border:1px solid #e2e8f0; border-radius:12px; background:#f8fafc; resize:none;}
 .overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index:1000; }
+#synergy-panel {
+  position: absolute;
+  display: none;
+  background: white;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  z-index: 999;
+  pointer-events: auto;
+}
+
+.synergy-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.synergy-pokemon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.synergy-pokemon:hover {
+  transform: translateY(-2px);
+  border-color: var(--pkmn-red);
+}
+
+.synergy-pokemon img {
+  width: 56px;
+  height: 56px;
+}
+
+
 </style>
 </head>
 <body>
@@ -87,7 +127,7 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
           <li>Helping Hand</li>
           <li>Trick Room</li>
         </ul>
-<div class="strategy-box">Auto-sets Psychic Terrain to boost Expanding Force and block priority moves like Fake Out. Follow Me provides redirection for setup sweepers.</div>      </div>
+<div class="strategy-box">Sets up Psychic Terrain automatically and hits both enemies with Expanding Force. Supports with Follow Me and Helping Hand</div>      </div>
 
       <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Quiet">
         <div class="select-indicator"></div>
@@ -107,7 +147,7 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
           <li>Trick Room</li>
           <li>Dazzling Gleam</li>
         </ul>
-<div class="strategy-box">Armor Tail prevents opponents from using priority moves on your team. It acts as a primary Trick Room setter and a powerful Special attacker.</div>      </div>
+<div class="strategy-box">Armor Tail prevents opponents from using priority moves on your team. It acts as a primary Trick Room setter, holding a Mental Herb so it can set it up without troubles.</div>      </div>
 
       <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Bold">
         <div class="select-indicator"></div>
@@ -147,7 +187,7 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
           <li>Tailwind</li>
           <li>Taunt</li>
         </ul>
-<div class="strategy-box">Priority Tailwind setter. Uses Prankster Taunt to shut down opposing Trick Room or Spore users. Focus Sash ensures it survives at least one turn.</div>      </div>
+<div class="strategy-box">Prankster Tailwind setter. Uses Taunt to shut down opposing Trick Room or Spore users. Focus Sash ensures it survives at least one turn.</div>      </div>
 
       <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Jolly">
         <div class="select-indicator"></div>
@@ -167,7 +207,7 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
           <li>Baby-Doll Eyes</li>
           <li>Tidy Up</li>
         </ul>
-<div class="strategy-box">Elite support via Friend Guard, reducing ally damage by 25%. Tidy Up cleans hazards while Population Bomb threatens high damage with Wide Lens.</div>      </div>
+<div class="strategy-box">Elite support via Friend Guard, reducing ally damage by 25%. Tidy Up cleans hazards while Population Bomb ensures Archaludon's Defense is maxxed.</div>      </div>
 
       <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Bold">
         <div class="select-indicator"></div>
@@ -187,7 +227,34 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
           <li>Floral Healing</li>
           <li>Giga Drain</li>
         </ul>
-<div class="strategy-box">Triage gives +3 priority to Floral Healing and Giga Drain, allowing it to heal allies or deal damage before almost any other move in the game.</div>      </div>
+<div class="strategy-box">Triage gives +3 priority to Floral Healing, Giga Drain and Draining Kiss, allowing it to heal allies or deal damage before almost any other move in the game.</div>      </div>
+
+<div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Calm">
+  <div class="select-indicator"></div>
+  <div class="card-header">
+    <span class="nickname">Here I Am</span>
+    <span class="species">Sinistcha</span><br>
+    <span class="item-tag">Leftovers</span>
+  </div>
+
+  <div class="render-container">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1013.png">
+  </div>
+
+  <span class="tera-type" style="background: var(--bug)">Bug</span>
+  <span class="ability">Ability: Hospitality</span>
+
+  <ul class="moves-list">
+    <li>Matcha Gotcha</li>
+    <li>Life Dew</li>
+    <li>Rage Powder</li>
+    <li>Shadow Ball</li>
+  </ul>
+
+  <div class="strategy-box">
+    Rage Powder redirects attacks away from allies while Sinistcha supports the team with Life Dew and Matcha Gotcha healing.
+  </div>
+</div>
     </div>
   </div>
 
@@ -313,8 +380,8 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
     <li>Aqua Jet</li>
   </ul>
 <div class="strategy-box">Sharpness boosts slicing moves like Ceaseless Edge, which deals massive damage while simultaneously setting a layer of Spikes on the opponent's side.</div></div>
-        
 </div>
+
   </div>
 
   <div class="category-block">
@@ -398,7 +465,8 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
           <li>Hyper Voice</li>
           <li>Protect</li>
         </ul>
-<div class="strategy-box">Triple immunity (Normal, Fighting, Ghost) combined with Illusion creates massive mind games. Use Hex to punish enemies burned by Will-o-Wisp.</div>      </div>
+<div class="strategy-box">Triple immunity (Normal, Fighting, Ghost) combined with Illusion creates massive mind games. Use Hex to punish enemies burned by Will-O-Wisp.</div>      
+</div>
       <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Timid" data-evs="252 SpA / 4 SpD / 252 Spe">
   <div class="select-indicator"></div>
   <div class="card-header">
@@ -437,7 +505,30 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
     <li>Tera Blast</li>
   </ul>
 <div class="strategy-box">Pixilate-boosted Hyper Voice is its primary weapon. Under Trick Room, it functions as a Special nuke that bypasses Substitutes via sound.</div></div>
-    </div>
+    <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Timid" data-evs="252 SpA / 4 SpD / 252 Spe">
+  <div class="select-indicator"></div>
+  <div class="card-header">
+    <span class="nickname">Melena</span>
+    <span class="species">Flutter Mane</span><br>
+    <span class="item-tag">Booster Energy</span>
+  </div>
+  <div class="render-container">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/987.png">
+  </div>
+  <span class="tera-type" style="background: var(--ghost)">Ghost</span>
+  <span class="ability">Ability: Protosynthesis</span>
+  <ul class="moves-list">
+    <li>Icy Wind</li>
+    <li>Dazzling Gleam</li>
+    <li>Shadow Ball</li>
+    <li>Protect</li>
+  </ul>
+  <div class="strategy-box">
+  Booster Energy activates Protosynthesis immediately, boosting Speed for instant pressure. 
+  Icy Wind provides speed control, while Dazzling Gleam and Shadow Ball apply heavy spread and single-target damage.
+</div>
+
+</div></div>
   </div>
 
   <div class="category-block">
@@ -525,74 +616,115 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
   </div>
 
   <div class="category-block">
-    <h2>Pivots & Other</h2>
-    <div class="pokemon-grid">
-      <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Careful">
-        <div class="select-indicator"></div>
-        <div class="card-header">
-          <span class="nickname">Powerhouse</span>
-          <span class="species">Incineroar</span><br>
-          <span class="item-tag">Sitrus Berry</span>
-        </div>
-        <div class="render-container">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/727.png">
-        </div>
-        <span class="tera-type" style="background: var(--grass)">Grass</span>
-        <span class="ability">Ability: Intimidate</span>
-        <ul class="moves-list">
-          <li>Fake Out</li>
-          <li>Flare Blitz</li>
-          <li>U-turn</li>
-          <li>Knock Off</li>
-        </ul>
-<div class="strategy-box">The gold standard for VGC. Cycles Intimidate and Fake Out via U-turn to constantly debuff the physical attackers on the opposing side.</div>      </div>
+  <h2>Pivots & Other</h2>
+  <div class="pokemon-grid">
 
-      <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Timid">
-        <div class="select-indicator"></div>
-        <div class="card-header">
-          <span class="nickname">Air Fryer</span>
-          <span class="species">Rotom-Heat</span><br>
-          <span class="item-tag">Charcoal</span>
-        </div>
-        <div class="render-container">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10008.png">
-        </div>
-        <span class="tera-type" style="background: var(--fire)">Fire</span>
-        <span class="ability">Ability: Levitate</span>
-        <ul class="moves-list">
-          <li>Volt Switch</li>
-          <li>Overheat</li>
-          <li>Will-O-Wisp</li>
-          <li>Pain Split</li>
-        </ul>
-<div class="strategy-box">Levitate removes its Ground weakness. It provides burn support with Will-O-Wisp and high-power Fire coverage with Overheat.</div>      </div>
-      <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Quiet" data-evs="252 HP / 252 SpA / 4 SpD" data-ivs="0 Spe">
-  <div class="select-indicator"></div>
-  <div class="card-header">
-    <span class="nickname">Spike</span>
-    <span class="species">Pincurchin</span><br>
-    <span class="item-tag">Electric Seed</span>
+    <!-- Incineroar -->
+    <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Careful">
+      <div class="select-indicator"></div>
+      <div class="card-header">
+        <span class="nickname">Powerhouse</span>
+        <span class="species">Incineroar</span><br>
+        <span class="item-tag">Sitrus Berry</span>
+      </div>
+      <div class="render-container">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/727.png">
+      </div>
+      <span class="tera-type" style="background: var(--grass)">Grass</span>
+      <span class="ability">Ability: Intimidate</span>
+      <ul class="moves-list">
+        <li>Fake Out</li>
+        <li>Flare Blitz</li>
+        <li>U-turn</li>
+        <li>Knock Off</li>
+      </ul>
+      <div class="strategy-box">
+        The gold standard for VGC. Cycles Intimidate and Fake Out via U-turn to constantly debuff physical attackers.
+      </div>
+    </div>
+
+    <!-- Rotom-Heat -->
+    <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Timid">
+      <div class="select-indicator"></div>
+      <div class="card-header">
+        <span class="nickname">Air Fryer</span>
+        <span class="species">Rotom-Heat</span><br>
+        <span class="item-tag">Charcoal</span>
+      </div>
+      <div class="render-container">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10008.png">
+      </div>
+      <span class="tera-type" style="background: var(--fire)">Fire</span>
+      <span class="ability">Ability: Levitate</span>
+      <ul class="moves-list">
+        <li>Volt Switch</li>
+        <li>Overheat</li>
+        <li>Will-O-Wisp</li>
+        <li>Pain Split</li>
+      </ul>
+      <div class="strategy-box">
+        Levitate removes its Ground weakness. Provides pivot pressure with Volt Switch and burn support.
+      </div>
+    </div>
+
+    <!-- Palafin -->
+    <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Jolly" data-evs="252 Atk / 4 SpD / 252 Spe">
+      <div class="select-indicator"></div>
+      <div class="card-header">
+        <span class="nickname">Palace</span>
+        <span class="species">Palafin</span><br>
+        <span class="item-tag">Mystic Water</span>
+      </div>
+      <div class="render-container">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/964.png">
+      </div>
+      <span class="tera-type" style="background: var(--water)">Water</span>
+      <span class="ability">Ability: Zero to Hero</span>
+      <ul class="moves-list">
+        <li>Acrobatics</li>
+        <li>Flip Turn</li>
+        <li>Jet Punch</li>
+        <li>Drain Punch</li>
+      </ul>
+      <div class="strategy-box">
+        Flip Turn activates Zero to Hero, transforming into Hero Form. Jet Punch provides powerful priority STAB. 
+        Drain Punch adds recovery, while Acrobatics becomes strong if the item is removed or consumed.
+      </div>
+    </div>
+
+    <!-- Pincurchin -->
+    <div class="pkmn-card" onclick="togglePokemon(this)" data-nature="Quiet" data-evs="252 HP / 252 SpA / 4 SpD" data-ivs="0 Spe">
+      <div class="select-indicator"></div>
+      <div class="card-header">
+        <span class="nickname">Spike</span>
+        <span class="species">Pincurchin</span><br>
+        <span class="item-tag">Electric Seed</span>
+      </div>
+      <div class="render-container">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/871.png">
+      </div>
+      <span class="tera-type" style="background: var(--flying)">Flying</span>
+      <span class="ability">Ability: Electric Surge</span>
+      <ul class="moves-list">
+        <li>Zing Zap</li>
+        <li>Tera Blast</li>
+        <li>Recover</li>
+        <li>Protect</li>
+      </ul>
+      <div class="strategy-box">
+        Auto-sets Electric Terrain to enable Paradox allies. In Trick Room, its low speed makes it a sturdy slow pivot.
+      </div>
+    </div>
+
   </div>
-  <div class="render-container">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/871.png">
-  </div>
-  <span class="tera-type" style="background: var(--flying)">Flying</span>
-  <span class="ability">Ability: Electric Surge</span>
-  <ul class="moves-list">
-    <li>Zing Zap</li>
-    <li>Tera Blast</li>
-    <li>Recover</li>
-    <li>Protect</li>
-  </ul>
-<div class="strategy-box">Auto-sets Electric Terrain to enable Paradox allies. In Trick Room, its low speed and Electric Seed defense boost make it a sturdy, slow pivot.</div></div>
 </div>
-  </div>
-</div>
+
 
 
 <div id="export-panel">
     <button class="btn btn-secondary" id="random-btn">Auto-Pick 6</button>
     <div id="team-count">Selected: 0/6</div>
+    <button class="btn btn-danger" id="clear-btn" style="background: #ef4444; margin-right: 8px;">Clear Team</button>
     <button class="btn" id="export-btn" disabled onclick="generateShowdown()">Export to Showdown</button>
 </div>
 
@@ -607,88 +739,323 @@ h2::before { content:''; width:8px; height:32px; background: var(--pkmn-red); bo
 </div>
 
 <script>
+/* =========================
+   TEAM COUNT & TOGGLE
+========================= */
+
 function updateTeamCount(){
-    const count = document.querySelectorAll(".pkmn-card.selected").length;
-    document.getElementById("team-count").innerText = `Selected: ${count}/6`;
-    document.getElementById("export-btn").disabled = count !== 6;
+  const count = document.querySelectorAll(".pkmn-card.selected").length;
+  document.getElementById("team-count").innerText = `Selected: ${count}/6`;
+  document.getElementById("export-btn").disabled = count !== 6;
 }
 
-function togglePokemon(card, force=false){
-    if(force){
-        card.classList.add("selected");
-    } else {
-        if(card.classList.contains("selected")){
-            card.classList.remove("selected");
-        } else {
-            if(document.querySelectorAll(".pkmn-card.selected").length < 6){
-                card.classList.add("selected");
-            }
-        }
-    }
-    updateTeamCount();
-}
-
-document.getElementById("random-btn").addEventListener("click", () => {
-    const cards = Array.from(document.querySelectorAll(".pkmn-card"));
-    cards.forEach(c => c.classList.remove("selected"));
-    for(let i = cards.length-1; i>0; i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-    }
-    cards.slice(0,6).forEach(c => togglePokemon(c, true));
+document.getElementById("clear-btn").addEventListener("click", () => {
+  const selected = document.querySelectorAll(".pkmn-card.selected");
+  selected.forEach(card => card.classList.remove("selected"));
+  hideSynergy();
+  updateTeamCount();
 });
 
+function togglePokemon(card, force = false){
+  if(force){
+    card.classList.add("selected");
+  } else {
+    if(card.classList.contains("selected")){
+      card.classList.remove("selected");
+    } else {
+      if(document.querySelectorAll(".pkmn-card.selected").length < 6){
+        card.classList.add("selected");
+      }
+    }
+  }
+  updateTeamCount();
+}
+
+/* =========================
+   RANDOM PICK
+========================= */
+
+document.getElementById("random-btn").addEventListener("click", () => {
+  const cards = Array.from(document.querySelectorAll(".pkmn-card"));
+  cards.forEach(c => c.classList.remove("selected"));
+  for(let i = cards.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+  cards.slice(0,6).forEach(c => togglePokemon(c, true));
+});
+
+/* =========================
+   SYNERGY & STRATEGY DATA
+========================= */
+
+const synergyMap = {
+
+  // ===== PSYCHIC / TR CORE =====
+  "Indeedee-F": ["Hatterene","Farigiraf","Ursaluna","Gholdengo","Archaludon","Sylveon"],
+  "Farigiraf": ["Indeedee-F","Ursaluna","Gholdengo","Sylveon","Archaludon"],
+  "Hatterene": ["Indeedee-F","Ursaluna","Gourgeist","Zoroark-Hisui","Sylveon"],
+
+  // ===== SPEED CONTROL =====
+  "Whimsicott": ["Iron Bundle","Flamigo","Volcarona","Lycanroc-Dusk","Flutter Mane"],
+  "Iron Bundle": ["Whimsicott","Incineroar","Gholdengo","Flutter Mane","Volcarona"],
+  "Lycanroc-Dusk": ["Whimsicott","Incineroar","Rotom-Heat","Iron Bundle"],
+
+  // ===== HEAL / REDIRECTION =====
+  "Comfey": ["Azumarill","Ursaluna","Archaludon","Sinistcha","Maushold"],
+  "Sinistcha": ["Azumarill","Ursaluna","Archaludon","Comfey","Maushold"],
+
+  // ===== FRIEND GUARD CORE =====
+  "Maushold": ["Ursaluna","Archaludon","Azumarill","Gholdengo","Sinistcha"],
+
+  // ===== PHYSICAL SWEEPERS =====
+  "Ursaluna": ["Indeedee-F","Farigiraf","Maushold","Comfey","Sinistcha","Gourgeist"],
+  "Azumarill": ["Flamigo","Comfey","Maushold","Sinistcha","Incineroar"],
+  "Flamigo": ["Azumarill","Whimsicott","Incineroar","Iron Bundle"],
+
+  // ===== STEEL PRESSURE =====
+  "Gholdengo": ["Indeedee-F","Samurott-Hisui","Incineroar","Iron Bundle","Corviknight"],
+  "Archaludon": ["Maushold","Comfey","Indeedee-F","Sinistcha","Ursaluna"],
+  "Corviknight": ["Incineroar","Maushold","Gholdengo","Whimsicott"],
+
+  // ===== WATER / OFFENSE =====
+  "Samurott-Hisui": ["Gholdengo","Rotom-Heat","Whimsicott","Iron Bundle"],
+  "Primarina": ["Incineroar","Whimsicott","Archaludon","Maushold"],
+  "Palafin": ["Incineroar","Whimsicott","Iron Bundle","Maushold"],
+
+  // ===== SPECIAL SWEEPERS =====
+  "Volcarona": ["Whimsicott","Iron Bundle","Incineroar","Flutter Mane"],
+  "Sylveon": ["Indeedee-F","Farigiraf","Hatterene","Maushold"],
+  "Flutter Mane": ["Iron Bundle","Whimsicott","Incineroar","Gholdengo"],
+  "Zoroark-Hisui": ["Gholdengo","Hatterene","Gourgeist","Flutter Mane"],
+
+  // ===== DEFENSIVE WALLS =====
+  "Gliscor": ["Rotom-Heat","Incineroar","Corviknight"],
+  "Doublade": ["Indeedee-F","Farigiraf","Gourgeist","Sylveon"],
+  "Gourgeist": ["Ursaluna","Hatterene","Indeedee-F","Farigiraf"],
+
+  // ===== PIVOTS =====
+  "Incineroar": ["Maushold","Gholdengo","Iron Bundle","Flutter Mane","Palafin","Azumarill"],
+  "Rotom-Heat": ["Incineroar","Samurott-Hisui","Lycanroc-Dusk","Gliscor"],
+  "Pincurchin": ["Iron Bundle","Flutter Mane","Gholdengo"]
+};
+
+
+/* =========================
+   STRATEGY CLUSTERS
+   (activated at 3+ mons)
+========================= */
+
+const strategyClusters = {
+  "trick-room": ["Indeedee-F", "Farigiraf", "Hatterene", "Ursaluna", "Gourgeist"],
+  "friend-guard-core": ["Maushold", "Archaludon", "Ursaluna"],
+  "belly-drum-core": ["Azumarill", "Flamigo", "Comfey"],
+  "speed-control": ["Whimsicott", "Iron Bundle", "Incineroar"],
+  "steel-pressure": ["Gholdengo", "Archaludon", "Corviknight"]
+};
+
+/* =========================
+   SYNERGY PANEL UI
+========================= */
+
+const panel = document.createElement("div");
+panel.id = "synergy-panel";
+panel.style.position = "absolute";
+panel.style.display = "none";
+panel.style.background = "white";
+panel.style.borderRadius = "16px";
+panel.style.padding = "12px";
+panel.style.boxShadow = "0 12px 30px rgba(0,0,0,0.25)";
+panel.style.zIndex = "999";
+document.body.appendChild(panel);
+
+/* =========================
+   HELPERS
+========================= */
+
+function getSelectedSpecies(){
+  return [...document.querySelectorAll(".pkmn-card.selected")]
+    .map(c => c.querySelector(".species").innerText.trim());
+}
+
+function getCardBySpecies(species){
+  return [...document.querySelectorAll(".pkmn-card")]
+    .find(c => c.querySelector(".species").innerText.trim() === species);
+}
+
+function getSprite(species){
+  const card = getCardBySpecies(species);
+  return card ? card.querySelector("img").src : "";
+}
+
+/* =========================
+   STRATEGY-AWARE SUGGESTIONS
+========================= */
+
+function getStrategySuggestions(){
+  const selected = getSelectedSpecies();
+  const suggestions = new Set();
+
+  Object.values(strategyClusters).forEach(cluster => {
+    const hits = cluster.filter(p => selected.includes(p)).length;
+    if(hits >= 2){
+      cluster.forEach(p => {
+        if(!selected.includes(p)) suggestions.add(p);
+      });
+    }
+  });
+
+  return [...suggestions];
+}
+
+/* =========================
+   SHOW SYNERGY
+========================= */
+
+function showSynergy(card){
+  const species = card.querySelector(".species").innerText.trim();
+  panel.innerHTML = "";
+
+  const grid = document.createElement("div");
+  grid.style.display = "flex";
+  grid.style.gap = "10px";
+
+  const selectedCount = document.querySelectorAll(".pkmn-card.selected").length;
+
+  let pool = new Set(synergyMap[species] || []);
+
+  if(selectedCount >= 3){
+    getStrategySuggestions().forEach(p => pool.add(p));
+  }
+
+  pool.forEach(name => {
+    const target = getCardBySpecies(name);
+    if(!target || target.classList.contains("selected")) return;
+    if(document.querySelectorAll(".pkmn-card.selected").length >= 6) return;
+
+    const btn = document.createElement("div");
+    btn.style.width = "64px";
+    btn.style.height = "64px";
+    btn.style.borderRadius = "12px";
+    btn.style.background = "#f8fafc";
+    btn.style.border = "2px solid #e2e8f0";
+    btn.style.cursor = "pointer";
+    btn.style.display = "flex";
+    btn.style.alignItems = "center";
+    btn.style.justifyContent = "center";
+    btn.style.transition = "0.15s";
+
+    btn.onmouseenter = () => btn.style.borderColor = "var(--pkmn-red)";
+    btn.onmouseleave = () => btn.style.borderColor = "#e2e8f0";
+
+    const img = document.createElement("img");
+    img.src = getSprite(name);
+    img.style.width = "56px";
+    img.style.height = "56px";
+
+    btn.onclick = e => {
+  e.stopPropagation();
+
+  togglePokemon(target);
+
+  scrollToCard(target);
+
+  // Give the browser a breath so layout settles
+  setTimeout(() => {
+    showSynergy(target);
+  }, 250);
+};
+
+    btn.appendChild(img);
+    grid.appendChild(btn);
+  });
+
+  if(!grid.children.length) return;
+
+  panel.appendChild(grid);
+
+  const rect = card.getBoundingClientRect();
+  panel.style.top = `${window.scrollY + rect.bottom + 8}px`;
+  panel.style.left = `${rect.left}px`;
+  panel.style.display = "block";
+}
+
+function hideSynergy(){
+  panel.style.display = "none";
+}
+
+/* =========================
+   TOGGLE HOOK
+========================= */
+
+const originalToggle = togglePokemon;
+togglePokemon = function(card, force = false){
+  originalToggle(card, force);
+
+  if(card.classList.contains("selected") &&
+     document.querySelectorAll(".pkmn-card.selected").length < 6){
+    showSynergy(card);
+  } else {
+    hideSynergy();
+  }
+};
+
+/* =========================
+   SHOWDOWN EXPORT
+========================= */
+
 function generateShowdown(){
-    const selected = document.querySelectorAll(".pkmn-card.selected");
-    let output = "";
-    selected.forEach(c => {
-        const nick = c.querySelector(".nickname").innerText.trim();
-        const species = c.querySelector(".species").innerText.trim();
-        const item = c.querySelector(".item-tag").innerText.trim();
-        const ability = c.querySelector(".ability").innerText.split(":")[1].trim();
-const tera = c.querySelector(".tera-type").innerText.trim();
-const teraFormatted = tera.charAt(0).toUpperCase() + tera.slice(1).toLowerCase();
+  const selected = document.querySelectorAll(".pkmn-card.selected");
+  let output = "";
 
+  selected.forEach(c => {
+    const nick = c.querySelector(".nickname").innerText.trim();
+    const species = c.querySelector(".species").innerText.trim();
+    const item = c.querySelector(".item-tag").innerText.trim();
+    const ability = c.querySelector(".ability").innerText.split(":")[1].trim();
+    const tera = c.querySelector(".tera-type").innerText.trim();
+    const teraFormatted = tera.charAt(0).toUpperCase() + tera.slice(1).toLowerCase();
+    const evs = c.getAttribute("data-evs") || "252 HP / 252 Atk / 4 SpD";
+    const nature = c.getAttribute("data-nature") || "Serious";
+    const ivs = c.getAttribute("data-ivs");
 
+    const moves = [...c.querySelectorAll(".moves-list li")]
+      .map(li => li.innerText.trim())
+      .join("\n- ");
 
-        const gender = c.getAttribute("data-gender") ? ` (${c.getAttribute("data-gender")})` : "";
-        const evs = c.getAttribute("data-evs") || "252 HP / 252 Atk / 4 SpD";
-        const nature = c.getAttribute("data-nature") || "Serious";
-        const ivs = c.getAttribute("data-ivs");
+    output += `${nick} (${species}) @ ${item}\n`;
+    output += `Ability: ${ability}\n`;
+    output += `Tera Type: ${teraFormatted}\n`;
+    output += `EVs: ${evs}\n`;
+    output += `${nature} Nature\n`;
+    if(ivs) output += `IVs: ${ivs}\n`;
+    output += `- ${moves}\n\n`;
+  });
 
-        const moves = Array.from(c.querySelectorAll(".moves-list li"))
-            .map(li => li.innerText.trim())
-            .join("\n- ");
-
-        output += `${nick} (${species})${gender} @ ${item}\n`;
-        output += `Ability: ${ability}\n`;
-       output += `Tera Type: ${teraFormatted}\n`;
-        output += `EVs: ${evs}\n`;
-        output += `${nature} Nature\n`;
-        if(ivs) output += `IVs: ${ivs}\n`;
-        output += `- ${moves}\n\n`;
-    });
-    document.getElementById("output-text").value = output.trim();
-    document.getElementById("overlay").style.display = "block";
-    document.getElementById("showdown-output").style.display = "block";
+  document.getElementById("output-text").value = output.trim();
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("showdown-output").style.display = "block";
 }
 
 function closeModal(){
-    document.getElementById("overlay").style.display = "none";
-    document.getElementById("showdown-output").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("showdown-output").style.display = "none";
 }
 
 function copyToClipboard(){
-    const text = document.getElementById("output-text");
-    text.select();
-    navigator.clipboard.writeText(text.value);
-    const btn = event.target;
-    const oldText = btn.innerText;
-    btn.innerText = "Copied!";
-    setTimeout(() => btn.innerText = oldText, 2000);
+  const text = document.getElementById("output-text");
+  text.select();
+  navigator.clipboard.writeText(text.value);
+}
+function scrollToCard(card){
+  card.scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+    inline: "nearest"
+  });
 }
 </script>
 
+<div id="synergy-panel"></div>
 </body>
 </html>
-
